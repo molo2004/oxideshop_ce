@@ -51,16 +51,6 @@ define('VIEW_INDEXSTATE_NOINDEXFOLLOW', 2); //  no index / follow
  */
 class BaseController extends \oxView
 {
-
-    /**
-     * Facebook widget status marker
-     *
-     * @deprecated since v5.3 (2016-05-20); Facebook will be extracted into module.
-     *
-     * @var bool
-     */
-    protected $_blFbWidgetsOn = null;
-
     /**
      * Characters which should be removed while preparing meta keywords
      *
@@ -1894,7 +1884,7 @@ class BaseController extends \oxView
 
     /**
      * Returns active lang suffix
-     * usally it used in html lang attr to allow the browser to interpret the page in the right language 
+     * usally it used in html lang attr to allow the browser to interpret the page in the right language
      * e.g. to support hyphons
      * @return string
      */
@@ -1913,7 +1903,7 @@ class BaseController extends \oxView
             } else {
                 // Performance
                 // use oxid shop internal languageAbbr, this might be correct in the most cases but not guaranteed to be that
-                // configured in the admin backend for that language                
+                // configured in the admin backend for that language
                 $this->_sActiveLangAbbr = $languageService->getLanguageAbbr();
             }
         }
@@ -2946,25 +2936,6 @@ class BaseController extends \oxView
     public function isActive($name)
     {
         return $this->getConfig()->getConfigParam("bl" . $name . "Enabled");
-    }
-
-    /**
-     * Returns TRUE if facebook widgets are on
-     *
-     * @deprecated since v5.3 (2016-05-20); Facebook will be extracted into module.
-     *
-     * @return boolean
-     */
-    public function isFbWidgetVisible()
-    {
-        if ($this->_blFbWidgetsOn === null) {
-            $utils = oxRegistry::get("oxUtilsServer");
-
-            // reading ..
-            $this->_blFbWidgetsOn = (bool) $utils->getOxCookie("fbwidgetson");
-        }
-
-        return $this->_blFbWidgetsOn;
     }
 
     /**
