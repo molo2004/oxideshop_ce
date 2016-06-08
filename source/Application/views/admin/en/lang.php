@@ -427,7 +427,6 @@ $aLang = array(
 'ARTICLE_MAIN_TITLE'                                       => 'Title',
 'ARTICLE_MAIN_ARTNUM'                                      => 'Prod.No.',
 'ARTICLE_MAIN_SEARCHKEYS'                                  => 'Search Terms',
-'ARTICLE_MAIN_TAGS'                                        => 'Tags',
 'ARTICLE_MAIN_VENDORID'                                    => 'Distributor',
 'ARTICLE_MAIN_PRICE'                                       => 'Price',
 'ARTICLE_MAIN_SAVE'                                        => 'Save',

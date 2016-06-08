@@ -179,15 +179,7 @@ window.onload = function ()
                     </td>
                   </tr>
 
-                  <tr>
-                    <td class="edittext">
-                      [{oxmultilang ident="ARTICLE_MAIN_TAGS"}]&nbsp;
-                    </td>
-                    <td class="edittext">
-                      <input type="text" class="editinput" size="32" maxlength="255" name="editval[tags]" value="[{$edit->tags}]">
-                      [{oxinputhelp ident="HELP_ARTICLE_MAIN_TAGS"}]
-                    </td>
-                  </tr>
+                  [{block name="article_main_extended"}][{/block}]
 
                   <tr>
                     <td class="edittext">
