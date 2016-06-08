@@ -486,6 +486,8 @@ class ArticleMainTest extends \OxidTestCase
      */
     public function testSave()
     {
+        $this->markTestIncomplete('Change test, tags are removed ');
+
         oxTestModules::addFunction('oxarticle', 'save', '{ return true; }');
         oxTestModules::addFunction('oxarticle', 'assignRecord', '{ return true; }');
         oxTestModules::addFunction('oxarticletaglist', 'save', '{ throw new Exception( "saveTags" ); }');
@@ -513,6 +515,8 @@ class ArticleMainTest extends \OxidTestCase
      */
     public function testSaveNoParent()
     {
+        $this->markTestIncomplete('Change test, tags are removed ');
+
         oxTestModules::addFunction('oxarticle', 'save', '{ return true; }');
         oxTestModules::addFunction('oxarticle', 'assignRecord', '{ return true; }');
         oxTestModules::addFunction('oxarticletaglist', 'save', '{ throw new Exception( "saveTags" ); }');
