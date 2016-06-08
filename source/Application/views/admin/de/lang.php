@@ -1145,7 +1145,6 @@ $aLang = array(
 'SHOP_CONFIG_POINTSFORINVITATION'                          => 'Bonuspunkte f¸r neu geworbene Kunden',
 'SHOP_CONFIG_POINTSFORREGISTRATION'                        => 'Bonuspunkte f¸r den Eingeladenen f¸r die Registrierung',
 'SHOP_CONFIG_CONFIRMCOOKIE'                                => 'Kunden m¸ssen der Verwendung von Cookies zustimmen',
-'SHOP_CONFIG_SHOWTAGS'                                     => 'Tags im eShop anzeigen',
 'SHOP_CONFIG_DOWNLOADS'                                    => 'Download-Artikel erlauben',
 'SHOP_CONFIG_DOWNLOADS_PATH'                               => 'Pfad zu den Dateien f¸r Download-Artikel',
 'SHOP_CONFIG_DEBIT_OLD_BANK_INFORMATION_NOT_ALLOWED'       => 'Ausschlieﬂlich IBAN/BIC verwenden',

@@ -1749,6 +1749,7 @@ $aLang = array(
 'SHOP_OPTIONS_GROUP_VARIANTS'                              => 'Variants',
 'SHOP_OPTIONS_GROUP_PRIVATESALES'                          => 'Private Sales',
 'SHOP_OPTIONS_GROUP_INVITATIONS'                           => 'Invitations',
+'SHOP_OPTIONS_GROUP_FACEBOOK'                              => 'Facebook',
 'SHOP_OPTIONS_GROUP_SHOP_DOWNLOADABLEARTICLES'             => 'Downloadable products',
 'SHOP_OPTIONS_BANK_INFORMATION'                            => 'Bank account information (SEPA)',
 

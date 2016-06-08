@@ -179,7 +179,7 @@ window.onload = function ()
                     </td>
                   </tr>
 
-                  [{block name="article_main_extended"}][{/block}]
+                  [{block name="admin_article_main_extended"}][{/block}]
 
                   <tr>
                     <td class="edittext">
