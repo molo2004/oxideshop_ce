@@ -179,22 +179,6 @@ class ArticleDetailsTest extends \OxidTestCase
         $this->assertTrue($oDetails->canRate());
     }
 
-    public function testCanChangeTags_nouser()
-    {
-        $oView = $this->getMock('Details', array('getUser'));
-        $oView->expects($this->once())->method('getUser');
-
-        $this->assertFalse($oView->canChangeTags());
-    }
-
-    public function testCanChangeTags_withuser()
-    {
-        $oView = $this->getMock('Details', array('getUser'));
-        $oView->expects($this->once())->method('getUser')->will($this->returnValue(true));
-
-        $this->assertTrue($oView->canChangeTags());
-    }
-
     /**
      * Test get attributes.
      *
