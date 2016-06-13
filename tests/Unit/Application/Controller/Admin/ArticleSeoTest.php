@@ -55,54 +55,105 @@ class ArticleSeoTest extends \OxidTestCase
     }
 
     /**
-     * Article_Seo::getEntryUri() test case
-     *
-     * @return null
+     * Article_Seo::getEntryUri() test case, with oxvendor as active category type given.
      */
-    public function testGetEntryUri()
+    public function testGetEntryUriOxVendorCase()
     {
-        $sProdId = $this->ensureProductIdExists();
+        $productId = $this->ensureProductIdExists();
 
-        $oEncoder = $this->getMock("oxSeoEncoderCategory", array("getArticleVendorUri", "getArticleManufacturerUri", "getArticleTagUri", "getArticleUri", "getArticleMainUri"));
-        $oEncoder->expects($this->at(0))->method('getArticleVendorUri')->will($this->returnValue("ArticleVendorUri"));
-        $oEncoder->expects($this->at(1))->method('getArticleManufacturerUri')->will($this->returnValue("ArticleManufacturerUri"));
-        $oEncoder->expects($this->at(2))->method('getArticleTagUri')->will($this->returnValue("ArticleTagUri"));
-        $oEncoder->expects($this->at(3))->method('getArticleUri')->will($this->returnValue("ArticleUri"));
-        $oEncoder->expects($this->at(4))->method('getArticleMainUri')->will($this->returnValue("ArticleMainUri"));
+        $seoEncoder = $this->getMock("oxSeoEncoderCategory", array("getArticleVendorUri"));
+        $seoEncoder->expects($this->at(0))->method('getArticleVendorUri')->will($this->returnValue("ArticleVendorUri"));
 
-        $oView = $this->getMock("Article_Seo", array("getEditObjectId", "_getEncoder", "getActCatType", "getEditLang", "getActCatLang", "getActCatId"));
-        $oView->expects($this->at(0))->method('getEditObjectId')->will($this->returnValue($sProdId));
-        $oView->expects($this->at(1))->method('_getEncoder')->will($this->returnValue($oEncoder));
+        $oView = $this->getMock("Article_Seo", array("getEditObjectId", "_getEncoder", "getActCatType", "getEditLang"));
+
+        $oView->expects($this->at(0))->method('getEditObjectId')->will($this->returnValue($productId));
+        $oView->expects($this->at(1))->method('_getEncoder')->will($this->returnValue($seoEncoder));
         $oView->expects($this->at(2))->method('getActCatType')->will($this->returnValue("oxvendor"));
         $oView->expects($this->at(3))->method('getEditLang')->will($this->returnValue(0));
 
-        $oView->expects($this->at(4))->method('getEditObjectId')->will($this->returnValue($sProdId));
-        $oView->expects($this->at(5))->method('_getEncoder')->will($this->returnValue($oEncoder));
-        $oView->expects($this->at(6))->method('getActCatType')->will($this->returnValue("oxmanufacturer"));
-        $oView->expects($this->at(7))->method('getEditLang')->will($this->returnValue(0));
-
-        $oView->expects($this->at(8))->method('getEditObjectId')->will($this->returnValue($sProdId));
-        $oView->expects($this->at(9))->method('_getEncoder')->will($this->returnValue($oEncoder));
-        $oView->expects($this->at(10))->method('getActCatType')->will($this->returnValue("oxtag"));
-        $oView->expects($this->at(11))->method('getActCatLang')->will($this->returnValue(0));
-
-        $oView->expects($this->at(12))->method('getEditObjectId')->will($this->returnValue($sProdId));
-        $oView->expects($this->at(13))->method('_getEncoder')->will($this->returnValue($oEncoder));
-        $oView->expects($this->at(14))->method('getActCatType')->will($this->returnValue("oxsomething"));
-        $oView->expects($this->at(15))->method('getActCatId')->will($this->returnValue(true));
-        $oView->expects($this->at(16))->method('getEditLang')->will($this->returnValue(0));
-
-        $oView->expects($this->at(17))->method('getEditObjectId')->will($this->returnValue($sProdId));
-        $oView->expects($this->at(18))->method('_getEncoder')->will($this->returnValue($oEncoder));
-        $oView->expects($this->at(19))->method('getActCatType')->will($this->returnValue("oxsomething"));
-        $oView->expects($this->at(20))->method('getActCatId')->will($this->returnValue(false));
-        $oView->expects($this->at(21))->method('getEditLang')->will($this->returnValue(0));
-
         $this->assertEquals("ArticleVendorUri", $oView->getEntryUri());
-        $this->assertEquals("ArticleManufacturerUri", $oView->getEntryUri());
+    }
+    
+    /**
+     * Article_Seo::getEntryUri() test case, with the oxmanufacturer as active category type given. 
+     */
+    public function testGetEntryUriOxManufacturerCase()
+    {
+        $productId = $this->ensureProductIdExists();
+
+        $seoEncoder = $this->getMock("oxSeoEncoderCategory", array("getArticleManufacturerUri"));
+        $seoEncoder->expects($this->at(0))->method('getArticleManufacturerUri')->will($this->returnValue("ArticleManufacturerUri"));
+
+        $view = $this->getMock("Article_Seo", array("getEditObjectId", "_getEncoder", "getActCatType", "getEditLang"));
+
+        $view->expects($this->at(0))->method('getEditObjectId')->will($this->returnValue($productId));
+        $view->expects($this->at(1))->method('_getEncoder')->will($this->returnValue($seoEncoder));
+        $view->expects($this->at(2))->method('getActCatType')->will($this->returnValue("oxmanufacturer"));
+        $view->expects($this->at(3))->method('getEditLang')->will($this->returnValue(0));
+
+        $this->assertEquals("ArticleManufacturerUri", $view->getEntryUri());
+    }
+
+    /**
+     * Article_Seo::getEntryUri() test case, with tags.
+     */
+    public function testGetEntryUriOxTagsCase()
+    {
+        $productId = $this->ensureProductIdExists();
+
+        $seoEncoder = $this->getMock("oxSeoEncoderCategory", array("getArticleTagUri"));
+        $seoEncoder->expects($this->at(0))->method('getArticleTagUri')->will($this->returnValue("ArticleTagUri"));
+
+        $oView = $this->getMock("Article_Seo", array("getEditObjectId", "_getEncoder", "getActCatType", "getActCatLang"));
+
+        $oView->expects($this->at(0))->method('getEditObjectId')->will($this->returnValue($productId));
+        $oView->expects($this->at(1))->method('_getEncoder')->will($this->returnValue($seoEncoder));
+        $oView->expects($this->at(2))->method('getActCatType')->will($this->returnValue("oxtag"));
+        $oView->expects($this->at(3))->method('getActCatLang')->will($this->returnValue(0));
+
         $this->assertEquals("ArticleTagUri", $oView->getEntryUri());
-        $this->assertEquals("ArticleUri", $oView->getEntryUri());
-        $this->assertEquals("ArticleMainUri", $oView->getEntryUri());
+    }
+
+    /**
+     * Article_Seo::getEntryUri() test case, with given active category id.
+     */
+    public function testGetEntryUriDefaultWithActiveCategoryId()
+    {
+        $productId = $this->ensureProductIdExists();
+
+        $seoEncoder = $this->getMock("oxSeoEncoderCategory", array("getArticleUri"));
+        $seoEncoder->expects($this->at(0))->method('getArticleUri')->will($this->returnValue("ArticleUri"));
+
+        $view = $this->getMock("Article_Seo", array("getEditObjectId", "_getEncoder", "getActCatType", "getEditLang", "getActCatId"));
+
+        $view->expects($this->at(0))->method('getEditObjectId')->will($this->returnValue($productId));
+        $view->expects($this->at(1))->method('_getEncoder')->will($this->returnValue($seoEncoder));
+        $view->expects($this->at(2))->method('getActCatType')->will($this->returnValue("oxsomething"));
+        $view->expects($this->at(3))->method('getActCatId')->will($this->returnValue(true));
+        $view->expects($this->at(4))->method('getEditLang')->will($this->returnValue(0));
+
+        $this->assertEquals("ArticleUri", $view->getEntryUri());
+    }
+
+    /**
+     * Article_Seo::getEntryUri() test case, without given active category id.
+     */
+    public function testGetEntryUriDefaultWithoutActiveCategoryId()
+    {
+        $productId = $this->ensureProductIdExists();
+
+        $seoEncoder = $this->getMock("oxSeoEncoderCategory", array("getArticleMainUri"));
+        $seoEncoder->expects($this->at(0))->method('getArticleMainUri')->will($this->returnValue("ArticleMainUri"));
+
+        $view = $this->getMock("Article_Seo", array("getEditObjectId", "_getEncoder", "getActCatType", "getEditLang", "getActCatId"));
+
+        $view->expects($this->at(0))->method('getEditObjectId')->will($this->returnValue($productId));
+        $view->expects($this->at(1))->method('_getEncoder')->will($this->returnValue($seoEncoder));
+        $view->expects($this->at(2))->method('getActCatType')->will($this->returnValue("oxsomething"));
+        $view->expects($this->at(3))->method('getActCatId')->will($this->returnValue(false));
+        $view->expects($this->at(4))->method('getEditLang')->will($this->returnValue(0));
+
+        $this->assertEquals("ArticleMainUri", $view->getEntryUri());
     }
 
     /**
