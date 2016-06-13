@@ -61,16 +61,7 @@ class ArticleSeoTest extends \OxidTestCase
      */
     public function testGetEntryUri()
     {
-        $sO2CView = getViewName('oxobject2category');
-        $sQ = "select oxarticles.oxid from oxarticles left join {$sO2CView} on
-               oxarticles.oxid={$sO2CView}.oxobjectid where
-               oxarticles.oxactive='1' and {$sO2CView}.oxobjectid is not null";
-
-        $oDb = oxDb::getDb(oxDb::FETCH_MODE_ASSOC);
-        $sProdId = $oDb->getOne($sQ);
-
-        // must be existing
-        $this->assertTrue((bool) $sProdId);
+        $sProdId = $this->ensureProductIdExists();
 
         $oEncoder = $this->getMock("oxSeoEncoderCategory", array("getArticleVendorUri", "getArticleManufacturerUri", "getArticleTagUri", "getArticleUri", "getArticleMainUri"));
         $oEncoder->expects($this->at(0))->method('getArticleVendorUri')->will($this->returnValue("ArticleVendorUri"));
@@ -618,5 +609,23 @@ class ArticleSeoTest extends \OxidTestCase
 
         $this->assertTrue($oView->isEntryFixed());
         $this->assertFalse($oView->isEntryFixed());
+    }
+
+    /**
+     * @return string The product id.
+     */
+    protected function ensureProductIdExists()
+    {
+        $objectToCategoryViewName = getViewName('oxobject2category');
+        $query = "select oxarticles.oxid from oxarticles left join {$objectToCategoryViewName} on
+               oxarticles.oxid={$objectToCategoryViewName}.oxobjectid where
+               oxarticles.oxactive='1' and {$objectToCategoryViewName}.oxobjectid is not null";
+
+        $produdtId = oxDb::getDb(oxDb::FETCH_MODE_ASSOC)->getOne($query);
+
+        // must be existing
+        $this->assertTrue((bool) $produdtId);
+
+        return $produdtId;
     }
 }
