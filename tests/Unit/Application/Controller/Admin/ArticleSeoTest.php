@@ -356,27 +356,13 @@ class ArticleSeoTest extends \OxidTestCase
     }
 
     /**
-     * Article_Seo::_getSeoEntryType() test case (tag)
-     *
-     * @return null
-     */
-    public function testGetSeoEntryTypeTag()
-    {
-        $oView = $this->getMock("Article_Seo", array("getTag"));
-        $oView->expects($this->once())->method('getTag')->will($this->returnValue(true));
-        $this->assertEquals('dynamic', $oView->UNITgetSeoEntryType());
-    }
-
-    /**
      * Article_Seo::_getSeoEntryType() test case (default)
-     *
-     * @return null
      */
     public function testGetSeoEntryType()
     {
-        $oView = $this->getMock("Article_Seo", array("getTag"));
-        $oView->expects($this->once())->method('getTag')->will($this->returnValue(false));
-        $this->assertEquals('oxarticle', $oView->UNITgetSeoEntryType());
+        $view = oxNew("Article_Seo");
+        
+        $this->assertEquals('oxarticle', $view->UNITgetSeoEntryType());
     }
 
     /**
