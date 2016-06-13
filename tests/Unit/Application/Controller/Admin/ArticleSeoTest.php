@@ -66,7 +66,7 @@ class ArticleSeoTest extends \OxidTestCase
                oxarticles.oxid={$sO2CView}.oxobjectid where
                oxarticles.oxactive='1' and {$sO2CView}.oxobjectid is not null";
 
-        $oDb = oxDb::getDb(oxDB::FETCH_MODE_ASSOC);
+        $oDb = oxDb::getDb(oxDb::FETCH_MODE_ASSOC);
         $sProdId = $oDb->getOne($sQ);
 
         // must be existing
@@ -479,7 +479,7 @@ class ArticleSeoTest extends \OxidTestCase
                oxarticles.oxid={$sO2CView}.oxobjectid where
                oxarticles.oxactive='1' and {$sO2CView}.oxobjectid is not null";
 
-        $oDb = oxDb::getDb(oxDB::FETCH_MODE_ASSOC);
+        $oDb = oxDb::getDb(oxDb::FETCH_MODE_ASSOC);
         $sProdId = $oDb->getOne($sQ);
 
         // must be existing
@@ -513,7 +513,7 @@ class ArticleSeoTest extends \OxidTestCase
                oxarticles.oxid=oxartextends.oxid where
                oxarticles.oxactive='1' and oxartextends.oxid is not null and oxartextends.oxtags != ''";
 
-        $oDb = oxDb::getDb(oxDB::FETCH_MODE_ASSOC);
+        $oDb = oxDb::getDb(oxDb::FETCH_MODE_ASSOC);
         $sProdId = $oDb->getOne($sQ);
 
         // must be existing
