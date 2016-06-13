@@ -346,19 +346,21 @@ class ArticleSeo extends \Object_Seo
      */
     public function getEntryUri()
     {
-        $oProduct = oxNew('oxArticle');
-        if ($oProduct->load($this->getEditObjectId())) {
-            $oEncoder = $this->_getEncoder();
+        $product = oxNew('oxArticle');
+
+        if ($product->load($this->getEditObjectId())) {
+            $seoEncoder = $this->_getEncoder();
+
             switch ($this->getActCatType()) {
                 case 'oxvendor':
-                    return $oEncoder->getArticleVendorUri($oProduct, $this->getEditLang());
+                    return $seoEncoder->getArticleVendorUri($product, $this->getEditLang());
                 case 'oxmanufacturer':
-                    return $oEncoder->getArticleManufacturerUri($oProduct, $this->getEditLang());
+                    return $seoEncoder->getArticleManufacturerUri($product, $this->getEditLang());
                 default:
                     if ($this->getActCatId()) {
-                        return $oEncoder->getArticleUri($oProduct, $this->getEditLang());
+                        return $seoEncoder->getArticleUri($product, $this->getEditLang());
                     } else {
-                        return $oEncoder->getArticleMainUri($oProduct, $this->getEditLang());
+                        return $seoEncoder->getArticleMainUri($product, $this->getEditLang());
                     }
             }
         }
