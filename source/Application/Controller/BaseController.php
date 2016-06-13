@@ -394,13 +394,6 @@ class BaseController extends \oxView
     /** @var array check all "must-be-fields" if they are completely. */
     protected $_aMustFillFields = null;
 
-    /**
-     * @var bool Show tags cloud.
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     */
-    protected $_blShowTagCloud = true;
-
     /** @var bool If active root category was changed. */
     protected $_blRootCatChanged = false;
 
@@ -427,13 +420,6 @@ class BaseController extends \oxView
 
     /** @var integer Number of possible pages. */
     protected $_iCntPages = null;
-
-    /**
-     * @var stdClass Active tag.
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     */
-    protected $_oActTag = null;
 
     /** @var string Form id. */
     protected $_sFormId = null;
@@ -1376,9 +1362,6 @@ class BaseController extends \oxView
 
         $params['searchrecomm'] = $config->getRequestParameter('searchrecomm', true);
         $params['searchparam'] = $config->getRequestParameter('searchparam', true);
-        // @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-        $params['searchtag'] = $config->getRequestParameter('searchtag', true);
-        // END deprecated
 
         $params['searchvendor'] = $config->getRequestParameter('searchvendor');
         $params['searchcnid'] = $config->getRequestParameter('searchcnid');
@@ -1540,14 +1523,6 @@ class BaseController extends \oxView
                     $result .= '&amp;searchmanufacturer=' . rawurlencode(rawurldecode($var));
                 }
                 break;
-            // @deprecated v5.3 (2016-05-04); Will be moved to own module.
-            case 'tag':
-                $result .= "&amp;listtype={$listType}";
-                if ($param = rawurlencode($config->getRequestParameter('searchtag', true))) {
-                    $result .= "&amp;searchtag={$param}";
-                }
-                break;
-            // END deprecated
         }
 
         return $result;
@@ -1696,11 +1671,7 @@ class BaseController extends \oxView
         if ($value = oxRegistry::getConfig()->getRequestParameter('searchrecomm')) {
             $url .= "&amp;searchrecomm={$value}";
         }
-        // @deprecated v5.3 (2016-05-04); Will be moved to own module.
-        if ($value = oxRegistry::getConfig()->getRequestParameter('searchtag')) {
-            $url .= "&amp;searchtag={$value}";
-        }
-        // END deprecated
+
         if ($value = oxRegistry::getConfig()->getRequestParameter('recommid')) {
             $url .= "&amp;recommid={$value}";
         }
@@ -1797,15 +1768,6 @@ class BaseController extends \oxView
     public function setSortColumns($sortColumns)
     {
         $this->_aSortColumns = $sortColumns;
-    }
-
-    /**
-     * Returns if tags will be edit
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     */
-    public function getEditTags()
-    {
     }
 
     /**
@@ -1951,11 +1913,6 @@ class BaseController extends \oxView
             if (isset($searchParamForLink)) {
                 $this->_sAdditionalParams .= "&amp;searchparam={$searchParamForLink}";
             }
-            // @deprecated v5.3 (2016-05-04); Will be moved to own module.
-            if (($value = oxRegistry::getConfig()->getRequestParameter('searchtag'))) {
-                $this->_sAdditionalParams .= '&amp;searchtag=' . rawurlencode(rawurldecode($value));
-            }
-            // END deprecated
             if (($value = oxRegistry::getConfig()->getRequestParameter('searchcnid'))) {
                 $this->_sAdditionalParams .= '&amp;searchcnid=' . rawurlencode(rawurldecode($value));
             }
@@ -2185,34 +2142,6 @@ class BaseController extends \oxView
         }
 
         return $this->_iActPage;
-    }
-
-    /**
-     * Active tag info object getter. Object properties:
-     *  - sTag current tag
-     *  - link link leading to tag article list
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     *
-     * @return stdClass
-     */
-    public function getActTag()
-    {
-        if ($this->_oActTag === null) {
-            $this->_oActTag = new stdClass();
-            $this->_oActTag->sTag = $tag = $this->getConfig()->getRequestParameter("searchtag", 1);
-            $seoEncoderTag = oxRegistry::get("oxSeoEncoderTag");
-
-            $link = false;
-            if (oxRegistry::getUtils()->seoIsActive()) {
-                $link = $seoEncoderTag->getTagUrl($tag, oxRegistry::getLang()->getBaseLanguage());
-            }
-
-            $constructedUrl = $this->getConfig()->getShopHomeURL() . $seoEncoderTag->getStdTagUri($tag, false);
-            $this->_oActTag->link = $link ? $link : $constructedUrl;
-        }
-
-        return $this->_oActTag;
     }
 
     /**
@@ -2996,18 +2925,6 @@ class BaseController extends \oxView
     public function isPriceCalculated()
     {
         return (bool) $this->getConfig()->getConfigParam('bl_perfLoadPrice');
-    }
-
-    /**
-     * Returns true if tags are ON
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     *
-     * @return boolean
-     */
-    public function showTags()
-    {
-        return (bool) $this->_blShowTagCloud && $this->getConfig()->getConfigParam("blShowTags");
     }
 
     /**
