@@ -579,34 +579,28 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getSelectionList() test case
-     *
-     * @return null
      */
     public function testGetSelectionList()
     {
-        $iProdId = oxDb::getDb()->getOne("select oxid from oxarticles");
-        $iEditLang = oxRegistry::getLang()->getEditLanguage();
+        $productId = oxDb::getDb()->getOne("select oxid from oxarticles");
+        $editingLanguageId = oxRegistry::getLang()->getEditLanguage();
 
-        $oProduct = oxNew('oxArticle');
-        $oProduct->load($iProdId);
-        $aLangs = $oProduct->getAvailableInLangs();
+        $product = oxNew('oxArticle');
+        $product->load($productId);
 
-        $oView = $this->getMock("Article_Seo", array("getEditObjectId", "_getCategoryList", "_getVendorList", "_getManufacturerList", "_getTagList"));
-        $oView->expects($this->any())->method("getEditObjectId")->will($this->returnValue($iProdId));
-        $oView->expects($this->any())->method("_getCategoryList")->will($this->returnValue("CategoryList"));
-        $oView->expects($this->any())->method("_getVendorList")->will($this->returnValue("VendorList"));
-        $oView->expects($this->any())->method("_getManufacturerList")->will($this->returnValue("ManufacturerList"));
-        $oView->expects($this->any())->method("_getTagList")->will($this->returnValue("TagList"));
+        $view = $this->getMock("Article_Seo", array("getEditObjectId", "_getCategoryList", "_getVendorList", "_getManufacturerList", "_getTagList"));
+        $view->expects($this->any())->method("getEditObjectId")->will($this->returnValue($productId));
+        $view->expects($this->any())->method("_getCategoryList")->will($this->returnValue("CategoryList"));
+        $view->expects($this->any())->method("_getVendorList")->will($this->returnValue("VendorList"));
+        $view->expects($this->any())->method("_getManufacturerList")->will($this->returnValue("ManufacturerList"));
+        $view->expects($this->any())->method("_getTagList")->will($this->returnValue("TagList"));
 
-        $aList = array();
-        $aList["oxcategory"][$iEditLang] = "CategoryList";
-        $aList["oxvendor"][$iEditLang] = "VendorList";
-        $aList["oxmanufacturer"][$iEditLang] = "ManufacturerList";
-        foreach ($aLangs as $iLang => $sLangTitle) {
-            $aList["oxtag"][$iLang] = "TagList";
-        }
+        $expectedList = array();
+        $expectedList["oxcategory"][$editingLanguageId] = "CategoryList";
+        $expectedList["oxvendor"][$editingLanguageId] = "VendorList";
+        $expectedList["oxmanufacturer"][$editingLanguageId] = "ManufacturerList";
 
-        $this->assertEquals($aList, $oView->getSelectionList());
+        $this->assertEquals($expectedList, $view->getSelectionList());
     }
 
     /**
