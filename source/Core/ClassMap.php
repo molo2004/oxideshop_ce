@@ -532,7 +532,6 @@ class ClassMap extends \OxidEsales\Eshop\Core\Edition\ClassMap
             'oxseoencodercontent' => 'OxidEsales\Eshop\Application\Model\SeoEncoderContent',
             'oxseoencodermanufacturer' => 'OxidEsales\Eshop\Application\Model\SeoEncoderManufacturer',
             'oxseoencoderrecomm' => 'OxidEsales\Eshop\Application\Model\SeoEncoderRecomm',
-            'oxseoencodertag' => 'OxidEsales\Eshop\Application\Model\SeoEncoderTag',
             'oxseoencodervendor' => 'OxidEsales\Eshop\Application\Model\SeoEncoderVendor',
             'oxshop' => 'OxidEsales\Eshop\Application\Model\Shop',
             'oxshoplist' => 'OxidEsales\Eshop\Application\Model\ShopList',
