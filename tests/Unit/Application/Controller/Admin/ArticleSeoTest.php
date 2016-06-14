@@ -477,23 +477,14 @@ class ArticleSeoTest extends \OxidTestCase
     }
 
     /**
-     * Article_Seo::processParam() test case (tag)
-     */
-    public function testProcessParamTag()
-    {
-        $oView = $this->getMock("Article_Seo", array("getTag"));
-        $oView->expects($this->once())->method("getTag")->will($this->returnValue(true));
-        $this->assertEquals("", $oView->processParam("testParam"));
-    }
-
-    /**
      * Article_Seo::processParam() test case (any other than tag)
      */
     public function testProcessParam()
     {
-        $oView = $this->getMock("Article_Seo", array("getTag", "getActCatId"));
-        $oView->expects($this->once())->method("getTag")->will($this->returnValue(false));
+        $oView = $this->getMock("Article_Seo", array("getActCatId"));
+
         $oView->expects($this->once())->method("getActCatId")->will($this->returnValue("testParam2"));
+
         $this->assertEquals("testParam2", $oView->processParam("testParam1#testParam2#0"));
     }
 
