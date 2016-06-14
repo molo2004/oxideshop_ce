@@ -93,26 +93,6 @@ class ArticleSeoTest extends \OxidTestCase
     }
 
     /**
-     * Article_Seo::getEntryUri() test case, with tags.
-     */
-    public function testGetEntryUriOxTagsCase()
-    {
-        $productId = $this->ensureProductIdExists();
-
-        $seoEncoder = $this->getMock("oxSeoEncoderCategory", array("getArticleTagUri"));
-        $seoEncoder->expects($this->at(0))->method('getArticleTagUri')->will($this->returnValue("ArticleTagUri"));
-
-        $oView = $this->getMock("Article_Seo", array("getEditObjectId", "_getEncoder", "getActCatType", "getActCatLang"));
-
-        $oView->expects($this->at(0))->method('getEditObjectId')->will($this->returnValue($productId));
-        $oView->expects($this->at(1))->method('_getEncoder')->will($this->returnValue($seoEncoder));
-        $oView->expects($this->at(2))->method('getActCatType')->will($this->returnValue("oxtag"));
-        $oView->expects($this->at(3))->method('getActCatLang')->will($this->returnValue(0));
-
-        $this->assertEquals("ArticleTagUri", $oView->getEntryUri());
-    }
-
-    /**
      * Article_Seo::getEntryUri() test case, with given active category id.
      */
     public function testGetEntryUriDefaultWithActiveCategoryId()
