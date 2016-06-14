@@ -505,39 +505,6 @@ class ArticleSeoTest extends \OxidTestCase
     }
 
     /**
-     * Article_Seo::_getTagList() test case
-     *
-     * @return null
-     */
-    public function testGetTagList()
-    {
-        $sQ = "select oxarticles.oxid from oxarticles left join oxartextends on
-               oxarticles.oxid=oxartextends.oxid where
-               oxarticles.oxactive='1' and oxartextends.oxid is not null and oxartextends.oxtags != ''";
-
-        $oDb = oxDb::getDb(oxDb::FETCH_MODE_ASSOC);
-        $sProdId = $oDb->getOne($sQ);
-
-        // must be existing
-        $this->assertTrue((bool) $sProdId);
-
-        $oProduct = oxNew('oxArticle');
-        $oProduct->load($sProdId);
-
-        $oArticleTagList = oxNew('oxArticleTagList');
-        $oArticleTagList->load($sProdId);
-        $oTagSet = $oArticleTagList->get();
-        $aTags = $oTagSet->get();
-
-        $oView = oxNew('Article_Seo');
-        $aList = $oView->UNITgetTagList($oProduct, 0);
-
-        // must be have few assignments
-        $this->assertTrue(count($aTags) > 0);
-        $this->assertEquals(count($aTags), count($aList));
-    }
-
-    /**
      * Article_Seo::getSelectionList() test case
      */
     public function testGetSelectionList()
