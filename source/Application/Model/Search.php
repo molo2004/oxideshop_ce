@@ -70,7 +70,7 @@ class Search extends \oxSuperCfg
      * @param string $sInitialSearchManufacturer initial Manufacturer to seearch for
      * @param string $sSortBy                    sort by
      *
-     * @return oxarticlelist
+     * @return ArticleList
      */
     public function getSearchArticles($sSearchParamForQuery = false, $sInitialSearchCat = false, $sInitialSearchVendor = false, $sInitialSearchManufacturer = false, $sSortBy = false)
     {
@@ -192,7 +192,7 @@ class Search extends \oxSuperCfg
         // longdesc field now is kept on different table
         $sDescJoin = '';
         if (is_array($aSearchCols = $this->getConfig()->getConfigParam('aSearchCols'))) {
-            if (in_array('oxlongdesc', $aSearchCols) || in_array('oxtags', $aSearchCols)) {
+            if (in_array('oxlongdesc', $aSearchCols)) {
                 $sDescView = getViewName('oxartextends', $this->_iLanguage);
                 $sDescJoin = " LEFT JOIN {$sDescView} ON {$sArticleTable}.oxid={$sDescView}.oxid ";
             }
@@ -284,7 +284,7 @@ class Search extends \oxSuperCfg
                 }
 
                 // as long description now is on different table table must differ
-                if ($sField == 'oxlongdesc' || $sField == 'oxtags') {
+                if ($sField == 'oxlongdesc') {
                     $sSearchField = getViewName('oxartextends', $this->_iLanguage) . ".{$sField}";
                 } else {
                     $sSearchField = "{$sArticleTable}.{$sField}";
