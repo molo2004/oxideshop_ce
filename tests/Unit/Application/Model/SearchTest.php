@@ -273,40 +273,44 @@ class SearchTest extends \OxidTestCase
 
     public function testSearchWithParam()
     {
-        $oSearch = oxNew('oxSearch');
-        $oSearchList = $oSearch->getSearchArticles("bar");
-        $iAllArtCnt = $oSearch->getSearchArticleCount("bar");
+        $searchModel = oxNew('oxSearch');
+        $searchList = $searchModel->getSearchArticles("bar");
+        $allArticlesCount = $searchModel->getSearchArticleCount("bar");
 
-        $sArticleTable = getViewName('oxarticles');
+        $articleTable = getViewName('oxarticles');
         // @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-        $sQ = "select $sArticleTable.oxid from $sArticleTable, oxartextends  where  oxartextends.oxid=$sArticleTable.oxid and ( ( $sArticleTable.oxactive = 1  or ( $sArticleTable.oxactivefrom < '" . date('Y-m-d H:i:s') . "' and
-        $sArticleTable.oxactiveto > '" . date('Y-m-d H:i:s') . "' ) ) and ( $sArticleTable.oxstockflag != 2 or ( $sArticleTable.oxstock +
-        $sArticleTable.oxvarstock ) > 0 ) ) and $sArticleTable.oxparentid = '' and $sArticleTable.oxissearch = 1
-        and ( ( $sArticleTable.oxtitle like '%bar%' or  $sArticleTable.oxshortdesc like '%bar%' or $sArticleTable.oxsearchkeys like '%bar%' or
-        $sArticleTable.oxartnum like '%bar%' or oxartextends.oxtags like '%bar%' ) )";
+        $datetime = date('Y-m-d H:i:s');
+
+        $query = "SELECT $articleTable.oxid FROM $articleTable, oxartextends " .
+                 "WHERE  oxartextends.oxid=$articleTable.oxid AND" .
+                 "( ( $articleTable.oxactive = 1  OR ( $articleTable.oxactivefrom < '$datetime' AND
+        $articleTable.oxactiveto > '$datetime' ) ) AND ( $articleTable.oxstockflag != 2 OR ( $articleTable.oxstock +
+        $articleTable.oxvarstock ) > 0 ) ) AND $articleTable.oxparentid = '' AND $articleTable.oxissearch = 1
+        AND ( ( $articleTable.oxtitle like '%bar%' or  $articleTable.oxshortdesc LIKE '%bar%' or $articleTable.oxsearchkeys LIKE '%bar%' OR
+        $articleTable.oxartnum LIKE '%bar%' or oxartextends.oxtags LIKE '%bar%' ) )";
         // END deprecated
 
-        $aAll = oxDB::getDb()->getAll($sQ);
+        $all = oxDb::getDb()->getAll($query);
 
         // testing if article count in list is <= 'iNrofCatArticles' = 10;
         $count = 8;
         if ($this->getConfig()->getEdition() === 'EE') {
             $count = 5;
         }
-        $this->assertEquals($count, $oSearchList->count());
-        $this->assertEquals(count($aAll), $iAllArtCnt);
+        $this->assertEquals($count, $searchList->count());
+        $this->assertEquals(count($all), $allArticlesCount);
 
         // now looking if all found articles are correct
-        $aFoundIds = $oSearchList->arrayKeys();
+        $foundIds = $searchList->arrayKeys();
 
-        $aAll = array_slice($aAll, 0, 10); // if this tests fails here - you must add spec sorting for an upper SQL
-        foreach ($aAll as $aData) {
-            if (($sKey = array_search($aData[0], $aFoundIds)) !== false) {
-                unset($aFoundIds[$sKey]);
+        $all = array_slice($all, 0, 10); // if this tests fails here - you must add spec sorting for an upper SQL
+        foreach ($all as $row) {
+            if (($key = array_search($row[0], $foundIds)) !== false) {
+                unset($foundIds[$key]);
             }
         }
 
-        $this->assertEquals(0, count($aFoundIds));
+        $this->assertEquals(0, count($foundIds));
     }
 
     public function testSearchForArtNr()
