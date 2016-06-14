@@ -38,8 +38,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Tear down the fixture.
-     *
-     * @return null
      */
     protected function tearDown()
     {
@@ -158,8 +156,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Testing Article_Seo::showCatSelect()
-     *
-     * @return null
      */
     public function showCatSelect()
     {
@@ -169,8 +165,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getEncoder() test case
-     *
-     * @return null
      */
     public function testGetEncoder()
     {
@@ -181,8 +175,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::Render() test case
-     *
-     * @return null
      */
     public function testRender()
     {
@@ -192,8 +184,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getVendorList() test case (regular)
-     *
-     * @return null
      */
     public function testGetVendorList()
     {
@@ -216,8 +206,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getManufacturerList() test case (regular)
-     *
-     * @return null
      */
     public function testGetManufacturerList()
     {
@@ -241,8 +229,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getActCategory() test case (category)
-     *
-     * @return null
      */
     public function testGetActCategory()
     {
@@ -254,8 +240,6 @@ class ArticleSeoTest extends \OxidTestCase
     
     /**
      * Article_Seo::getActVendor() test case (manufacturer)
-     *
-     * @return null
      */
     public function testGetActVendor()
     {
@@ -268,8 +252,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getActManufacturer() test case (manufacturer)
-     *
-     * @return null
      */
     public function testGetActManufacturer()
     {
@@ -282,8 +264,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getListType() test case
-     *
-     * @return null
      */
     public function testGetListType()
     {
@@ -307,8 +287,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getAltSeoEntryId() test case
-     *
-     * @return null
      */
     public function testGetAltSeoEntryId()
     {
@@ -319,8 +297,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getEditLang() test case
-     *
-     * @return null
      */
     public function testGetEditLang()
     {
@@ -341,8 +317,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getType() test case (manufacturer)
-     *
-     * @return null
      */
     public function testGetType()
     {
@@ -352,8 +326,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getStdUrl() test case (vendor)
-     *
-     * @return null
      */
     public function testGetStdUrlVendor()
     {
@@ -367,8 +339,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getStdUrl() test case (manufacturer)
-     *
-     * @return null
      */
     public function testGetStdUrlManufacturer()
     {
@@ -382,8 +352,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getStdUrl() test case (tag)
-     *
-     * @return null
      */
     public function testGetStdUrlTag()
     {
@@ -397,8 +365,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getStdUrl() test case (default)
-     *
-     * @return null
      */
     public function testGetStdUrlDefault()
     {
@@ -412,8 +378,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getActCatType() test case
-     *
-     * @return null
      */
     public function testGetActCatType()
     {
@@ -430,8 +394,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getActCatLang() test case
-     *
-     * @return null
      */
     public function testGetActCatLang()
     {
@@ -448,8 +410,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::getActCatId() test case
-     *
-     * @return null
      */
     public function testGetActCatId()
     {
@@ -471,8 +431,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::_getCategoryList() test case
-     *
-     * @return null
      */
     public function testGetCategoryList()
     {
@@ -532,8 +490,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::processParam() test case (tag)
-     *
-     * @return null
      */
     public function testProcessParamTag()
     {
@@ -544,8 +500,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Article_Seo::processParam() test case (any other than tag)
-     *
-     * @return null
      */
     public function testProcessParam()
     {
@@ -557,8 +511,6 @@ class ArticleSeoTest extends \OxidTestCase
 
     /**
      * Vendor_Seo::isEntryFixed() test case
-     *
-     * @return null
      */
     public function testIsEntryFixed()
     {
