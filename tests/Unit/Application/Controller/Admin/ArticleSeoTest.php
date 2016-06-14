@@ -263,25 +263,33 @@ class ArticleSeoTest extends \OxidTestCase
     }
 
     /**
-     * Article_Seo::getListType() test case
+     * Test, that the method 'getListType' returns null, if the active category type is oxany.
      */
-    public function testGetListType()
+    public function testGetListTypeCaseAny()
+    {
+        $oView = $this->getMock("Article_Seo", array("getActCatType"));
+        $oView->expects($this->any())->method('getActCatType')->will($this->returnValue("oxany"));
+        $this->assertNull($oView->getListType());
+    }
+
+    /**
+     * Test, that the method 'getListType' returns vendor, if the active category type is oxvendor.
+     */
+    public function testGetListTypeCaseVendor()
     {
         $oView = $this->getMock("Article_Seo", array("getActCatType"));
         $oView->expects($this->any())->method('getActCatType')->will($this->returnValue("oxvendor"));
         $this->assertEquals("vendor", $oView->getListType());
+    }
 
+    /**
+     * Test, that the method 'getListType' returns manufacturer, if the active category type is oxmanufacturer.
+     */
+    public function testGetListTypeCaseManufacturer()
+    {
         $oView = $this->getMock("Article_Seo", array("getActCatType"));
         $oView->expects($this->any())->method('getActCatType')->will($this->returnValue("oxmanufacturer"));
         $this->assertEquals("manufacturer", $oView->getListType());
-
-        $oView = $this->getMock("Article_Seo", array("getActCatType"));
-        $oView->expects($this->any())->method('getActCatType')->will($this->returnValue("oxtag"));
-        $this->assertEquals("tag", $oView->getListType());
-
-        $oView = $this->getMock("Article_Seo", array("getActCatType"));
-        $oView->expects($this->any())->method('getActCatType')->will($this->returnValue("oxany"));
-        $this->assertNull($oView->getListType());
     }
 
 
