@@ -251,33 +251,7 @@ class ArticleSeoTest extends \OxidTestCase
         $oView = oxNew('Article_Seo');
         $this->assertTrue($oView->getActCategory() instanceof oxCategory);
     }
-
-    /**
-     * Article_Seo::getTag() test case (manufacturer)
-     *
-     * @return null
-     */
-    public function testGetTag()
-    {
-        $oTag1 = $this->getMock("oxManufacturer", array("getId", "getTitle"));
-        $oTag1->expects($this->once())->method('getId')->will($this->returnValue("testTagId2"));
-        $oTag1->expects($this->never())->method('getTitle')->will($this->returnValue("testTagId"));
-
-        $oTag2 = $this->getMock("oxManufacturer", array("getId", "getTitle"));
-        $oTag2->expects($this->once())->method('getId')->will($this->returnValue("testTagId"));
-        $oTag2->expects($this->once())->method('getTitle')->will($this->returnValue("testTagId"));
-
-        $aTagList = array($oTag1, $oTag2);
-
-        $oView = $this->getMock("Article_Seo", array("getActCatType", "getActCatId", "getActCatLang", "getEditObjectId", "_getTagList"));
-        $oView->expects($this->once())->method('getActCatType')->will($this->returnValue("oxtag"));
-        $oView->expects($this->once())->method('getActCatId')->will($this->returnValue("testTagId"));
-        $oView->expects($this->once())->method('getActCatLang')->will($this->returnValue(0));
-        $oView->expects($this->once())->method('getEditObjectId')->will($this->returnValue("ObjectId"));
-        $oView->expects($this->once())->method('_getTagList')->will($this->returnValue($aTagList));
-        $this->assertEquals("testTagId", $oView->getTag());
-    }
-
+    
     /**
      * Article_Seo::getActVendor() test case (manufacturer)
      *
