@@ -726,9 +726,6 @@ class ProductInfoFrontendTest extends FrontendTestCase
         $this->assertFalse($this->isVisible("pa[price]"));
         $this->click("priceAlarmLink");
         $this->waitForItemAppear("pa[price]");
-        $this->assertFalse($this->isVisible("tags"));
-        $this->click("//ul[@id='itemTabs']/li[4]/a");
-        $this->waitForItemAppear("tags");
         $this->assertFalse($this->isVisible("attributes"));
         $this->click("//ul[@id='itemTabs']/li[2]/a");
         $this->waitForItemAppear("attributes");
