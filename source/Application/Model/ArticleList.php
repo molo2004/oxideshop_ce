@@ -522,12 +522,10 @@ class ArticleList extends \oxList
         $sDescTable = '';
         $sDescJoin = '';
         if (is_array($aSearchCols = $this->getConfig()->getConfigParam('aSearchCols'))) {
-            // @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-            if (in_array('oxlongdesc', $aSearchCols) || in_array('oxtags', $aSearchCols)) {
+            if (in_array('oxlongdesc', $aSearchCols)) {
                 $sDescView = getViewName('oxartextends');
                 $sDescJoin = " LEFT JOIN $sDescView ON {$sDescView}.oxid={$sArticleTable}.oxid ";
             }
-            // END deprecated
         }
 
         // load the articles
@@ -650,91 +648,6 @@ class ArticleList extends \oxList
         $this->selectString($sSelect);
 
         return oxRegistry::get("oxUtilsCount")->getManufacturerArticleCount($sManufacturerId);
-    }
-
-    /**
-     * Loads a list of articles having
-     *
-     * @param string $sTag  Searched tag
-     * @param int    $iLang Active language
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     *             
-     * @return int
-     */
-    public function loadTagArticles($sTag, $iLang)
-    {
-        $oListObject = $this->getBaseObject();
-        $sArticleTable = $oListObject->getViewName();
-        $sArticleFields = $oListObject->getSelectFields();
-        $sViewName = getViewName('oxartextends', $iLang);
-
-        $oTag = oxNew('oxtag', $sTag);
-        $oTag->addUnderscores();
-        $sTag = $oTag->get();
-
-        $sQ = "select {$sArticleFields} from {$sViewName} inner join {$sArticleTable} on " .
-              "{$sArticleTable}.oxid = {$sViewName}.oxid where {$sArticleTable}.oxparentid = '' AND match ( {$sViewName}.oxtags ) " .
-              "against( " . oxDb::getDb()->quote("\"" . $sTag . "\"") . " IN BOOLEAN MODE )";
-
-        // checking stock etc
-        if (($sActiveSnippet = $oListObject->getSqlActiveSnippet())) {
-            $sQ .= " and {$sActiveSnippet}";
-        }
-
-        if ($this->_sCustomSorting) {
-            $sSort = $this->_sCustomSorting;
-            if (strpos($sSort, '.') === false) {
-                $sSort = $sArticleTable . '.' . $sSort;
-            }
-            $sQ .= " order by $sSort ";
-        }
-
-        $this->selectString($sQ);
-
-        // calc count - we can not use count($this) here as we might have paging enabled
-        return oxRegistry::get("oxUtilsCount")->getTagArticleCount($sTag, $iLang);
-    }
-
-    /**
-     * Returns array of article ids belonging to current tags
-     *
-     * @param string $sTag  current tag
-     * @param int    $iLang active language
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     *
-     * @return array
-     */
-    public function getTagArticleIds($sTag, $iLang)
-    {
-        $oListObject = $this->getBaseObject();
-        $sArticleTable = $oListObject->getViewName();
-        $sViewName = getViewName('oxartextends', $iLang);
-
-        $oTag = oxNew('oxtag', $sTag);
-        $oTag->addUnderscores();
-        $sTag = $oTag->get();
-
-        $sQ = "select {$sViewName}.oxid from {$sViewName} inner join {$sArticleTable} on " .
-              "{$sArticleTable}.oxid = {$sViewName}.oxid where {$sArticleTable}.oxparentid = '' and {$sArticleTable}.oxissearch = 1 and " .
-              "match ( {$sViewName}.oxtags ) " .
-              "against( " . oxDb::getDb()->quote("\"" . $sTag . "\"") . " IN BOOLEAN MODE )";
-
-        // checking stock etc
-        if (($sActiveSnippet = $oListObject->getSqlActiveSnippet())) {
-            $sQ .= " and {$sActiveSnippet}";
-        }
-
-        if ($this->_sCustomSorting) {
-            $sSort = $this->_sCustomSorting;
-            if (strpos($sSort, '.') === false) {
-                $sSort = $sArticleTable . '.' . $sSort;
-            }
-            $sQ .= " order by $sSort ";
-        }
-
-        return $this->_createIdListFromSql($sQ);
     }
 
     /**
@@ -1130,15 +1043,13 @@ class ArticleList extends \oxList
                     $sSearch .= ' or ';
                 }
 
-                // @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
                 // as long description now is on different table table must differ
-                if ($sField == 'oxlongdesc' || $sField == 'oxtags') {
+                if ($sField == 'oxlongdesc') {
                     $sSearchTable = getViewName('oxartextends');
                 } else {
                     $sSearchTable = $sArticleTable;
                 }
-                // END deprecated
-                
+
                 $sSearch .= $sSearchTable . '.' . $sField . ' like ' . $oDb->quote('%' . $sSearchString . '%') . ' ';
                 if ($sUml) {
                     $sSearch .= ' or ' . $sSearchTable . '.' . $sField . ' like ' . $oDb->quote('%' . $sUml . '%');
