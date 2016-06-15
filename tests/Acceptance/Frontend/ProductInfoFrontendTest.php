@@ -88,10 +88,6 @@ class ProductInfoFrontendTest extends FrontendTestCase
         $this->assertEquals("Test attribute 2 [EN] šÄßüл", $this->getText("//div[@id='attributes']//tr[3]/th"));
         $this->assertEquals("attr value 12 [EN] šÄßüл", $this->getText("//div[@id='attributes']//tr[3]/td"));
 
-        $this->assertEquals("%TAGS%", $this->clearString($this->getText("//ul[@id='itemTabs']/li[4]")));
-        $this->click("//ul[@id='itemTabs']/li[4]/a");
-        $this->waitForItemAppear("tags");
-        $this->assertEquals("šÄßüл tag [EN] 1", $this->clearString($this->getText("tags")));
 
         //buying product
         //TODO: Selenium refactor with basket construct
@@ -104,7 +100,6 @@ class ProductInfoFrontendTest extends FrontendTestCase
         $this->clickAndWait("//div[@id='overviewLink']/a");
         $this->assertEquals("%YOU_ARE_HERE%: / %SEARCH%", $this->getText("breadCrumb"));
         $this->assertEquals("100", $this->getValue("searchParam"));
-
     }
 
     /**
