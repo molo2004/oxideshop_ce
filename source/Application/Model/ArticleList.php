@@ -519,14 +519,7 @@ class ArticleList extends \oxList
         $sArticleTable = getViewName('oxarticles');
 
         // longdesc field now is kept on different table
-        $sDescTable = '';
-        $sDescJoin = '';
-        if (is_array($aSearchCols = $this->getConfig()->getConfigParam('aSearchCols'))) {
-            if (in_array('oxlongdesc', $aSearchCols)) {
-                $sDescView = getViewName('oxartextends');
-                $sDescJoin = " LEFT JOIN $sDescView ON {$sDescView}.oxid={$sArticleTable}.oxid ";
-            }
-        }
+        $sDescJoin = $this->getDescriptionJoin($sArticleTable);
 
         // load the articles
         $sSelect = "select $sArticleTable.oxid, $sArticleTable.oxtimestamp from $sArticleTable $sDescJoin where ";
@@ -1044,11 +1037,7 @@ class ArticleList extends \oxList
                 }
 
                 // as long description now is on different table table must differ
-                if ($sField == 'oxlongdesc') {
-                    $sSearchTable = getViewName('oxartextends');
-                } else {
-                    $sSearchTable = $sArticleTable;
-                }
+                $sSearchTable = $this->getSearchTableName($sArticleTable, $sField);
 
                 $sSearch .= $sSearchTable . '.' . $sField . ' like ' . $oDb->quote('%' . $sSearchString . '%') . ' ';
                 if ($sUml) {
@@ -1235,5 +1224,44 @@ class ArticleList extends \oxList
      */
     protected function updateArticles($aUpdatedArticleIds)
     {
+    }
+
+    /**
+     * Get description join. Needed in case of searching for data in table oxartextends or its views.
+     *
+     * @param string $table
+     *
+     * @return string
+     */
+    protected function getDescriptionJoin($table)
+    {
+        $descriptionJoin = '';
+        $searchColumns = $this->getConfig()->getConfigParam('aSearchCols');
+
+        if (is_array($searchColumns) && in_array('oxlongdesc', $searchColumns)) {
+            $viewName = getViewName('oxartextends');
+            $descriptionJoin = " LEFT JOIN $viewName ON {$viewName}.oxid={$table}.oxid ";
+        }
+        return $descriptionJoin;
+    }
+
+    /**
+     * Get search table name.
+     * Needed in case of searching for data in table oxartextends or its views.
+     *
+     * @param string $table
+     * @param string $field Chose table depending on field.
+     *
+     * @return string
+     */
+    protected function getSearchTableName($table, $field)
+    {
+        $searchTable = $table;
+
+        if ($field == 'oxlongdesc') {
+            $searchTable = getViewName('oxartextends');
+        }
+
+        return $searchTable;
     }
 }
