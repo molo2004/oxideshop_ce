@@ -1,4 +1,5 @@
 [{assign var="oDetailsProduct" value=$oView->getProduct()}]
+[{* @todo: remove when tags module works
 [{if $oView->showTags() && ( $oView->getTagCloudManager() || ( $oxcmp_user && $oDetailsProduct ) )}]
     [{oxscript include='js/widgets/oxajax.js'}]
     [{oxscript include='js/widgets/oxtag.js'}]
@@ -30,3 +31,4 @@
       </form>
     [{/if}]
 [{/if}]
+*}]
