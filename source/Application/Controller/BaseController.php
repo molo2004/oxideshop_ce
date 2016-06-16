@@ -1367,6 +1367,8 @@ class BaseController extends \oxView
         $params['searchcnid'] = $config->getRequestParameter('searchcnid');
         $params['searchmanufacturer'] = $config->getRequestParameter('searchmanufacturer');
 
+        $params = array_merge($params, $this->getViewConfig()->getAdditionalNavigationParameters());
+
         return $params;
     }
 
@@ -1506,6 +1508,7 @@ class BaseController extends \oxView
 
         switch ($listType) {
             default:
+                $result .= $this->getViewConfig()->getDynUrlParameters($listType);
                 break;
             case 'search':
                 $result .= "&amp;listtype={$listType}";
@@ -1675,6 +1678,8 @@ class BaseController extends \oxView
         if ($value = oxRegistry::getConfig()->getRequestParameter('recommid')) {
             $url .= "&amp;recommid={$value}";
         }
+
+        $url .= $this->getViewConfig()->getAdditionalRequestParameters();
 
         return $url;
     }
@@ -1928,6 +1933,8 @@ class BaseController extends \oxView
             if (($value = oxRegistry::getConfig()->getRequestParameter('mnid'))) {
                 $this->_sAdditionalParams .= '&amp;mnid=' . rawurlencode(rawurldecode($value));
             }
+
+            $this->_sAdditionalParams .= $this->getViewConfig()->getAdditionalParameters();
         }
 
         return $this->_sAdditionalParams;

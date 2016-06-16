@@ -1465,4 +1465,52 @@ class ViewConfig extends \oxSuperCfg
     {
         return $this->getConfig()->getEdition();
     }
+
+    /**
+     * Hook for modules.
+     * Returns array of params => values which are used in hidden forms and as additional url params.
+     * NOTICE: this method SHOULD return raw (non encoded into entities) parameters, because values
+     * are processed by htmlentities() to avoid security and broken templates problems
+     *
+     * @return array
+     */
+    public function getAdditionalNavigationParameters()
+    {
+        return array();
+    }
+
+    /**
+     * Hook for modules.
+     * Template variable getter. Returns additional params for url
+     *
+     * @return string
+     */
+    public function getAdditionalParameters()
+    {
+        return '';
+    }
+
+    /**
+     * Hook for modules.
+     * Collects additional _GET parameters used by eShop
+     *
+     * @return string
+     */
+    public function addRequestParameters()
+    {
+        return '';
+    }
+
+    /**
+     * Hook for modules.
+     * returns additional url params for dynamic url building
+     *
+     * @param string $listType
+     *
+     * @return string
+     */
+    public function getDynUrlParameters($listType)
+    {
+        return '';
+    }
 }
