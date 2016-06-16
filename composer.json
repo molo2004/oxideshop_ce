@@ -1,58 +1,21 @@
 {
-  "name": "vendor-name/oxideshop-compilation",
-  "type": "project",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "repositories": {
-    "oxid-esales/oxideshop-metapackage-ce": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/oxideshop_metapackage_ce"
-    },
-    "oxid-esales/oxideshop-metapackage-pe": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/oxideshop_metapackage_pe"
-    },
-    "oxid-esales/oxideshop-metapackage-ee": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/oxideshop_metapackage_ee"
-    },
-    "oxid-esales/oxideshop-composer-plugin": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/oxideshop_composer_plugin"
-    },
-    "oxid-esales/flow-theme": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/flow_theme"
-    },
-    "oxid-esales/tags_module": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/tags_module"
-    },
-    "oxid-esales/oxideshop-pe": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/oxideshop_pe"
-    },
-    "oxid-esales/oxideshop-ee": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/oxideshop_ee"
-    },
-    "ddoe/visualcms-module": {
-      "type": "vcs",
-      "url": "https://github.com/OXID-eSales/visual_cms_module"
-    }
-  },
+  "name": "oxid-esales/oxideshop-ce",
+  "description": "Use this file to get OXID eShop dependencies. Use modules/composer.json for project dependencies.",
+  "type": "oxideshop",
+  "keywords": ["oxid", "modules", "eShop"],
+  "homepage": "https://www.oxid-esales.com/en/home.html",
+  "license": [
+    "GPL-3.0",
+    "proprietary"
+  ],
   "require": {
-    "oxid-esales/oxideshop-metapackage-ce": "*",
     "phpmailer/phpmailer": "^5.2.14",
     "smarty/smarty": "^2.6.29"
   },
   "require-dev": {
     "oxid-esales/testing-library": "dev-master",
     "oxid-esales/coding-standards": "dev-master",
-    "incenteev/composer-parameter-handler": "~2.0",
-    "oxid-esales/oxideshop-pe": "dev-master",
-    "oxid-esales/oxideshop-ee": "dev-master",
-    "oxid-esales/tags_module": "dev-extract_tags_feature_into_contrib_module-ESDEV-3419"
+    "incenteev/composer-parameter-handler": "~2.0"
   },
   "autoload": {
     "psr-4": {
@@ -64,6 +27,8 @@
       "OxidEsales\\Eshop\\Tests\\": "./tests"
     }
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "scripts": {
     "post-install-cmd": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
