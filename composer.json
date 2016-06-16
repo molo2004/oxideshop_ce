@@ -1,52 +1,87 @@
 {
-    "name": "oxid-esales/oxideshop-ce",
-    "description": "Use this file to get OXID eShop dependencies. Use modules/composer.json for project dependencies.",
-    "type": "oxideshop",
-    "keywords": ["oxid", "modules", "eShop"],
-    "homepage": "https://www.oxid-esales.com/en/home.html",
-    "license": [
-        "GPL-3.0",
-        "proprietary"
-    ],
-    "require": {
-        "phpmailer/phpmailer": "^5.2.14",
-        "smarty/smarty": "^2.6.29"
+  "name": "vendor-name/oxideshop-compilation",
+  "type": "project",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": {
+    "oxid-esales/oxideshop-metapackage-ce": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/oxideshop_metapackage_ce"
     },
-    "require-dev": {
-        "oxid-esales/testing-library": "dev-master",
-        "oxid-esales/coding-standards": "dev-master",
-        "incenteev/composer-parameter-handler": "~2.0"
+    "oxid-esales/oxideshop-metapackage-pe": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/oxideshop_metapackage_pe"
     },
-    "autoload": {
-        "psr-4": {
-            "OxidEsales\\Eshop\\": "./source"
-        }
+    "oxid-esales/oxideshop-metapackage-ee": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/oxideshop_metapackage_ee"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "OxidEsales\\Eshop\\Tests\\": "./tests"
-        }
+    "oxid-esales/oxideshop-composer-plugin": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/oxideshop_composer_plugin"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "scripts": {
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ]
+    "oxid-esales/flow-theme": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/flow_theme"
     },
-    "extra": {
-        "incenteev-parameters": {
-            "file": "test_config.yml",
-            "dist-file": "vendor/oxid-esales/testing-library/test_config.yml.dist",
-            "parameter-key": "mandatory_parameters",
-            "env-map": {
-                "shop_path": "SHOP_PATH",
-                "shop_tests_path": "SHOP_TESTS_PATH",
-                "partial_module_paths": "PARTIAL_MODULE_PATHS"
-            }
-        }
+    "oxid-esales/tags_module": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/tags_module"
+    },
+    "oxid-esales/oxideshop-pe": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/oxideshop_pe"
+    },
+    "oxid-esales/oxideshop-ee": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/oxideshop_ee"
+    },
+    "ddoe/visualcms-module": {
+      "type": "vcs",
+      "url": "https://github.com/OXID-eSales/visual_cms_module"
     }
+  },
+  "require": {
+    "oxid-esales/oxideshop-metapackage-ce": "*",
+    "phpmailer/phpmailer": "^5.2.14",
+    "smarty/smarty": "^2.6.29"
+  },
+  "require-dev": {
+    "oxid-esales/testing-library": "dev-master",
+    "oxid-esales/coding-standards": "dev-master",
+    "incenteev/composer-parameter-handler": "~2.0",
+    "oxid-esales/oxideshop-pe": "dev-master",
+    "oxid-esales/oxideshop-ee": "dev-master",
+    "oxid-esales/tags_module": "dev-extract_tags_feature_into_contrib_module-ESDEV-3419"
+  },
+  "autoload": {
+    "psr-4": {
+      "OxidEsales\\Eshop\\": "./source"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OxidEsales\\Eshop\\Tests\\": "./tests"
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+    ],
+    "post-update-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+    ]
+  },
+  "extra": {
+    "incenteev-parameters": {
+      "file": "test_config.yml",
+      "dist-file": "vendor/oxid-esales/testing-library/test_config.yml.dist",
+      "parameter-key": "mandatory_parameters",
+      "env-map": {
+        "shop_path": "SHOP_PATH",
+        "shop_tests_path": "SHOP_TESTS_PATH",
+        "partial_module_paths": "PARTIAL_MODULE_PATHS"
+      }
+    }
+  }
 }
