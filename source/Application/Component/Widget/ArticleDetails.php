@@ -355,26 +355,6 @@ class ArticleDetails extends \oxWidget
     }
 
     /**
-     * Returns tag cloud manager class
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     *             
-     * @return oxTagCloud
-     */
-    public function getTagCloudManager()
-    {
-        /** @var oxArticleTagList $oTagList */
-        $oTagList = oxNew("oxArticleTagList");
-        //$oTagList->load($this->getProduct()->getId());
-        $oTagList->setArticleId($this->getProduct()->getId());
-        $oTagCloud = oxNew("oxTagCloud");
-        $oTagCloud->setTagList($oTagList);
-        $oTagCloud->setExtendedMode(true);
-
-        return $oTagCloud;
-    }
-
-    /**
      * Returns if tags can be changed, if user is logged in and
      * product exists.
      *

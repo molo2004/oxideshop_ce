@@ -104,7 +104,6 @@ class ClassMap extends \OxidEsales\Eshop\Core\Edition\ClassMap
             'oxwcookienote' => '\OxidEsales\Eshop\Application\Component\Widget\CookieNote',
             'oxwlanguagelist' => '\OxidEsales\Eshop\Application\Component\Widget\LanguageList',
             'oxwrecommendation' => '\OxidEsales\Eshop\Application\Component\Widget\Recommendation',
-            'oxwtagcloud' => '\OxidEsales\Eshop\Application\Component\Widget\TagCloud',
             'oxwarticledetails' => '\OxidEsales\Eshop\Application\Component\Widget\ArticleDetails',
             'oxwcurrencylist' => '\OxidEsales\Eshop\Application\Component\Widget\CurrencyList',
             'oxwmanufacturerlist' => '\OxidEsales\Eshop\Application\Component\Widget\ManufacturerList',
@@ -457,7 +456,6 @@ class ClassMap extends \OxidEsales\Eshop\Core\Edition\ClassMap
             'oxidisplayerror' => '\OxidEsales\Eshop\Core\Contract\IDisplayError',
             'oximodulevalidator' => '\OxidEsales\Eshop\Core\Contract\IModuleValidator',
             'oxiselectlist' => '\OxidEsales\Eshop\Core\Contract\ISelectList',
-            'oxitaglist' => '\OxidEsales\Eshop\Core\Contract\ITagList',
             'oxiurl' => '\OxidEsales\Eshop\Core\Contract\IUrl',
 
             'oxactionlist' => 'OxidEsales\Eshop\Application\Model\ActionList',
