@@ -23,7 +23,6 @@ namespace Unit\Application\Component\Widget;
 
 use oxArticle;
 use oxArticleList;
-use oxTagCloud;
 use \stdClass;
 use \oxField;
 use \Exception;
@@ -198,40 +197,6 @@ class ArticleDetailsTest extends \OxidTestCase
         $aAttrList = $oDetails->getAttributes();
         $sAttribValue = $aAttrList[$sID]->value;
         $this->assertEquals($sExpectedValue, $sAttribValue);
-    }
-
-    /**
-     * Test get tag cloud after adding new tags.
-     *
-     * @return null
-     */
-    public function testGetTagCloudManagerAfterAddTags()
-    {
-        oxTestModules::addFunction('oxSeoEncoderTag', '_saveToDb', '{return null;}');
-        oxTestModules::addFunction("oxutilsserver", "getServerVar", "{ \$aArgs = func_get_args(); if ( \$aArgs[0] === 'HTTP_HOST' ) { return '" . $this->getConfig()->getShopUrl() . "'; } elseif ( \$aArgs[0] === 'SCRIPT_NAME' ) { return ''; } else { return \$_SERVER[\$aArgs[0]]; } }");
-        oxTestModules::addFunction("oxutils", "seoIsActive", "{return true;}");
-        $this->setRequestParameter('newTags', "newTag");
-        $oArt = oxNew('oxArticle');
-        $oArt->load('2000');
-        $oArt->setId('_testArt');
-        $oArt->save();
-
-        $oArticle = oxNew('oxArticle');
-        $oArticle->load('_testArt');
-
-        $oDetails = $this->getProxyClass('oxwArticleDetails');
-        $oDetails->setNonPublicVar("_oProduct", $oArticle);
-        $this->assertTrue($oDetails->getTagCloudManager() instanceof oxTagCloud);
-    }
-
-    public function testIsEditableTags()
-    {
-        $oView = $this->getMock($this->getProxyClassName('oxwArticleDetails'), array('getProduct', 'getUser'));
-        $oView->expects($this->once())->method('getProduct')->will($this->returnValue(true));
-        $oView->expects($this->once())->method('getUser')->will($this->returnValue(true));
-
-        $this->assertTrue($oView->isEditableTags());
-        $this->assertTrue($oView->getNonPublicVar('_blCanEditTags'));
     }
 
     /**
