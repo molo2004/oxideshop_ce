@@ -1150,7 +1150,6 @@ $aLang = array(
 'SHOP_CONFIG_INVITATION'                                   => 'Invitation',
 'SHOP_CONFIG_POINTSFORINVITATION'                          => 'Credit points for inviting user',
 'SHOP_CONFIG_POINTSFORREGISTRATION'                        => 'Credit points for user registering after invitation',
-'SHOP_CONFIG_SHOWTAGS'                                     => 'Display tags in eShop',
 'SHOP_CONFIG_DOWNLOADS'                                    => 'Enable downloadable products',
 'SHOP_CONFIG_DOWNLOADS_PATH'                               => 'Path to files for downloadable products',
 'SHOP_CONFIG_CONFIRMCOOKIE'                                => 'Customers have to confirm the usage of cookies',
@@ -1749,7 +1748,6 @@ $aLang = array(
 'SHOP_OPTIONS_GROUP_VARIANTS'                              => 'Variants',
 'SHOP_OPTIONS_GROUP_PRIVATESALES'                          => 'Private Sales',
 'SHOP_OPTIONS_GROUP_INVITATIONS'                           => 'Invitations',
-'SHOP_OPTIONS_GROUP_FACEBOOK'                              => 'Facebook',
 'SHOP_OPTIONS_GROUP_SHOP_DOWNLOADABLEARTICLES'             => 'Downloadable products',
 'SHOP_OPTIONS_BANK_INFORMATION'                            => 'Bank account information (SEPA)',
 
