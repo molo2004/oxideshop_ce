@@ -298,7 +298,7 @@ CREATE TABLE `oxartextends` (
   `OXLONGDESC_2` text NOT NULL,
   `OXLONGDESC_3` text NOT NULL,
   `OXTIMESTAMP` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP COMMENT 'Timestamp',
-  PRIMARY KEY  (`OXID`),
+  PRIMARY KEY  (`OXID`)
 ) ENGINE=MyISAM COMMENT 'Additional information for articles';
 
 #
