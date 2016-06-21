@@ -976,17 +976,6 @@ class ArticleDetailsTest extends \OxidTestCase
         $this->assertFalse($oDetails->isMdVariantView());
     }
 
-    public function testGetTagSeparator()
-    {
-        $oConfig = $this->getMock('oxConfig', array('getConfigParam'));
-        $oConfig->expects($this->once())->method('getConfigParam')->with($this->equalTo('sTagSeparator'))->will($this->returnValue('test_separator'));
-
-        $oView = $this->getMock('oxwArticleDetails', array('getConfig'));
-        $oView->expects($this->once())->method('getConfig')->will($this->returnValue($oConfig));
-
-        $this->assertSame('test_separator', $oView->getTagSeparator());
-    }
-
     /**
      * Test getDefaultSorting when sorting mode is set to 'desc'
      *
