@@ -29,11 +29,8 @@
         [{/foreach}]
     [{/defun}]
     </ul>
-    [{* @todo: remove when tags module works
-    [{if $oView->showTags()}]
-         [{oxid_include_widget cl="oxwTagCloud" nocookie=1 noscript=1}]
-    [{/if}]
-    *}]
+    [{block name="categorytree_extended"}]
+    [{/block}]
 </nav>
 [{/if}]
 [{/if}]
