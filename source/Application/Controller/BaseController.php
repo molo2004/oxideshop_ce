@@ -1679,7 +1679,7 @@ class BaseController extends \oxView
             $url .= "&amp;recommid={$value}";
         }
 
-        $url .= $this->getViewConfig()->getAdditionalRequestParameters();
+        $url .= $this->getViewConfig()->addRequestParameters();
 
         return $url;
     }
