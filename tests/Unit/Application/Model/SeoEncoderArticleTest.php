@@ -29,9 +29,6 @@ use \oxDb;
 use \oxRegistry;
 use \oxTestModules;
 
-/**
- * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
- */
 class modSeoEncoderArticle extends oxSeoEncoderArticle
 {
 
