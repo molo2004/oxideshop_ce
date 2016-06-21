@@ -45,9 +45,8 @@
                                     [{assign var="sLabel" value="GENERAL_SEO_VND"|oxmultilangassign}]
                                 [{elseif $sListType == "oxmanufacturer"}]
                                     [{assign var="sLabel" value="GENERAL_SEO_MANUFACTURER"|oxmultilangassign}]
-                                [{elseif $sListType == "oxtag"}]
-                                [{assign var="oTagLang" value=$otherlang.$iLang}]
-                                    [{assign var="sLabel" value="GENERAL_SEO_TAG"|oxmultilangassign|cat:" "|cat:$oTagLang->sLangDesc}]
+                                [{block name="object_seo_extended"}]
+                                [{/block}]
                                 [{/if}]
 
                                 <optgroup label="[{$sLabel}]">

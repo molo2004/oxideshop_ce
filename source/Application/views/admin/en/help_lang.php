@@ -104,8 +104,7 @@ $aLang =  array(
                                                  '<ul><li>oxtitle = Title</li>' .
                                                  '<li>oxshortdesc = Short description</li>' .
                                                  '<li>oxsearchkeys = Search terms entered for each product</li>' .
-                                                 '<li>oxartnum = Product number</li>' .
-                                                 '<li>oxtags    = Tags entered for each product</li></ul>',
+                                                 '<li>oxartnum = Product number</li></ul>',
 
 'HELP_SHOP_CONFIG_SORTFIELDS'                 => 'Here you can define the database fields which can be used for sorting product lists. Enter one field per row.<br>' .
                                                  'The most common entries are:' .

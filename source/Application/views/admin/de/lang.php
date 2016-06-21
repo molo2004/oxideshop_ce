@@ -291,7 +291,6 @@ $aLang = array(
 'GENERAL_SEO_CAT'                                          => '-- Kategorie --',
 'GENERAL_SEO_VND'                                          => '-- Lieferant --',
 'GENERAL_SEO_MANUFACTURER'                                 => '-- Hersteller --',
-'GENERAL_SEO_TAG'                                          => '-- Stichworte --',
 'GENERAL_SEO_MAINCAT'                                      => '(Hauptkategorie)', // product seo tab near main category title
 'GENERAL_SEO_NOCAT'                                        => '(keine Kategorie zugeordnet)',   // product seo tab, article ha no category assigned
 
