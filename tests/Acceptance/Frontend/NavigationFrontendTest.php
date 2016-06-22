@@ -817,7 +817,7 @@ class NavigationFrontendTest extends FrontendTestCase
     public function testFrontendSearchConsideredFields()
     {
         //art num is not considered in search
-        $this->callShopSC("oxConfig", null, null, array("aSearchCols" => array("type" => "arr", "value" => array ("oxtitle", "oxshortdesc", "oxtags" ))));
+        $this->callShopSC("oxConfig", null, null, array("aSearchCols" => array("type" => "arr", "value" => array ("oxtitle", "oxshortdesc"))));
         $this->clearCache();
         $this->openShop();
         $this->searchFor("100");
@@ -825,7 +825,7 @@ class NavigationFrontendTest extends FrontendTestCase
         $this->assertTextPresent("0 %HITS_FOR% \"100\"");
 
         //art num is considered in search
-        $this->callShopSC("oxConfig", null, null, array("aSearchCols" => array("type" => "arr", "value" => array("oxtitle", "oxshortdesc", "oxsearchkeys", "oxartnum", "oxtags"))));
+        $this->callShopSC("oxConfig", null, null, array("aSearchCols" => array("type" => "arr", "value" => array("oxtitle", "oxshortdesc", "oxsearchkeys", "oxartnum"))));
         $this->clearTemp();
         $this->searchFor("100");
         $this->assertEquals("%YOU_ARE_HERE%: / %SEARCH%", $this->getText("breadCrumb"));
