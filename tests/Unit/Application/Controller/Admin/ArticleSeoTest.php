@@ -311,59 +311,7 @@ class ArticleSeoTest extends \OxidTestCase
         $oView = oxNew('Article_Seo');
         $this->assertEquals('oxarticle', $oView->UNITgetType());
     }
-
-    /**
-     * Article_Seo::_getStdUrl() test case (vendor)
-     */
-    public function testGetStdUrlVendor()
-    {
-        $oView = $this->getMock("Article_Seo", array("getActCatType", "getTag", "getActCatId"));
-        $oView->expects($this->any())->method("getActCatType")->will($this->returnValue("oxvendor"));
-        $oView->expects($this->any())->method("getActCatId")->will($this->returnValue("vendor"));
-        $oView->expects($this->any())->method("getTag")->will($this->returnValue("testTag"));
-
-        $this->assertEquals("index.php?cl=details&amp;anid=&amp;listtype=vendor&amp;cnid=v_vendor", $oView->UNITgetStdUrl("testOxId"));
-    }
-
-    /**
-     * Article_Seo::_getStdUrl() test case (manufacturer)
-     */
-    public function testGetStdUrlManufacturer()
-    {
-        $oView = $this->getMock("Article_Seo", array("getActCatType", "getTag", "getActCatId"));
-        $oView->expects($this->any())->method("getActCatType")->will($this->returnValue("oxmanufacturer"));
-        $oView->expects($this->any())->method("getActCatId")->will($this->returnValue("manufacturer"));
-        $oView->expects($this->any())->method("getTag")->will($this->returnValue("testTag"));
-
-        $this->assertEquals("index.php?cl=details&amp;anid=&amp;listtype=manufacturer&amp;mnid=manufacturer", $oView->UNITgetStdUrl("testOxId"));
-    }
-
-    /**
-     * Article_Seo::_getStdUrl() test case (tag)
-     */
-    public function testGetStdUrlTag()
-    {
-        $oView = $this->getMock("Article_Seo", array("getActCatType", "getTag", "getActCatId"));
-        $oView->expects($this->any())->method("getActCatType")->will($this->returnValue("oxtag"));
-        $oView->expects($this->any())->method("getActCatId")->will($this->returnValue("tag"));
-        $oView->expects($this->any())->method("getTag")->will($this->returnValue("testTag"));
-
-        $this->assertEquals("index.php?cl=details&amp;anid=&amp;listtype=tag&amp;searchtag=testTag", $oView->UNITgetStdUrl("testOxId"));
-    }
-
-    /**
-     * Article_Seo::_getStdUrl() test case (default)
-     */
-    public function testGetStdUrlDefault()
-    {
-        $oView = $this->getMock("Article_Seo", array("getActCatType", "getTag", "getActCatId"));
-        $oView->expects($this->any())->method("getActCatType")->will($this->returnValue("oxanytype"));
-        $oView->expects($this->any())->method("getActCatId")->will($this->returnValue("catid"));
-
-        $this->assertEquals("index.php?cl=details&amp;anid=&amp;cnid=catid", $oView->UNITgetStdUrl("testOxId"));
-
-    }
-
+    
     /**
      * Article_Seo::getActCatType() test case
      */
