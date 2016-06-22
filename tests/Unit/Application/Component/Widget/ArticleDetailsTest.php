@@ -216,11 +216,6 @@ class ArticleDetailsTest extends \OxidTestCase
         $oDetailsView->expects($this->never())->method('getActiveCategory');
         $this->assertEquals(OXARTICLE_LINKTYPE_MANUFACTURER, $oDetailsView->getLinkType());
 
-        $this->setRequestParameter('listtype', 'tag');
-        $oDetailsView = $this->getMock("oxwArticleDetails", array('getActiveCategory'));
-        $oDetailsView->expects($this->never())->method('getActiveCategory');
-        $this->assertEquals(OXARTICLE_LINKTYPE_TAG, $oDetailsView->getLinkType());
-
         $this->setRequestParameter('listtype', null);
         $oDetailsView = $this->getMock("oxwArticleDetails", array('getActiveCategory'));
         $oDetailsView->expects($this->once())->method('getActiveCategory')->will($this->returnValue(null));
