@@ -953,21 +953,6 @@ class ViewConfigTest extends \OxidTestCase
     }
 
     /**
-     * oxViewconfig::getActSearchTag() test case
-     *
-     * @return null
-     */
-
-    public function testGetActSearchTag()
-    {
-        $sTag = "test=john";
-        $this->setRequestParameter("searchtag", $sTag);
-
-        $oViewConf = oxNew('oxViewConfig');
-        $this->assertEquals($sTag, $oViewConf->getActSearchTag());
-    }
-
-    /**
      * oxViewconfig::getActListType() test case
      *
      * @return null
