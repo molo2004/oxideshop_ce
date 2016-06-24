@@ -59,11 +59,11 @@ REPLACE INTO `oxartextends` (`OXID`,  `OXLONGDESC`) VALUES
                            ('20016', '');
 
 #Articles long desc
-REPLACE INTO `oxartextends` (`OXID`,   `OXLONGDESC`,                                  `OXLONGDESC_1`VALUES
-                           ('1000',   '<p>Test product 0 long description [DE]</p>', '<p>Test product 0 long description [EN] šÄßüл</p>',
-                           ('1001',   '<p>Test product 1 long description [DE]</p>', '<p>Test product 1 long description [EN] šÄßüл</p>',
-                           ('1002',   '<p>Test product 2 long description [DE]</p>', '<p>Test product 2 long description [EN] šÄßüл</p>',
-                           ('1003',   '<p>Test product 3 long description [DE]</p>', '<p>Test product 3 long description [EN] šÄßüл</p>',
+REPLACE INTO `oxartextends` (`OXID`,   `OXLONGDESC`,                                  `OXLONGDESC_1`) VALUES
+                           ('1000',   '<p>Test product 0 long description [DE]</p>', '<p>Test product 0 long description [EN] šÄßüл</p>'),
+                           ('1001',   '<p>Test product 1 long description [DE]</p>', '<p>Test product 1 long description [EN] šÄßüл</p>'),
+                           ('1002',   '<p>Test product 2 long description [DE]</p>', '<p>Test product 2 long description [EN] šÄßüл</p>'),
+                           ('1003',   '<p>Test product 3 long description [DE]</p>', '<p>Test product 3 long description [EN] šÄßüл</p>'),
                            ('1002-1', '',                                            ''),
                            ('1002-2', '',                                            ''),
                            ('10010',  '',                                            ''),
