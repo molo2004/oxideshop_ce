@@ -125,9 +125,8 @@
             <td class="edittext">
             </td>
             <td class="edittext"><br>
-                [{if $oView->getActCatType() == 'oxtag'}]
-                    [{assign var="custreadonly" value="readonly disabled"}]
-                [{/if}]
+                [{block name="object_seo_custreadonly"}]
+                [{/block}]
                 [{include file="language_edit.tpl" custreadonly=$custreadonly}]
             </td>
         </tr>
