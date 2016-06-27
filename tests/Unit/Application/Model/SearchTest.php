@@ -292,7 +292,6 @@ class SearchTest extends UnitTestCase
         $allArticlesCount = $oSearch->getSearchArticleCount("bar");
 
         $articleTable = $this->tableViewNameGenerator->getViewName('oxarticles');
-        // @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
         $datetime = date('Y-m-d H:i:s');
 
         $query = "SELECT $articleTable.oxid FROM $articleTable, oxartextends " .
@@ -302,7 +301,6 @@ class SearchTest extends UnitTestCase
         $articleTable.oxvarstock ) > 0 ) ) AND $articleTable.oxparentid = '' AND $articleTable.oxissearch = 1
         AND ( ( $articleTable.oxtitle like '%bar%' or  $articleTable.oxshortdesc LIKE '%bar%' or $articleTable.oxsearchkeys LIKE '%bar%' OR
         $articleTable.oxartnum LIKE '%bar%') )";
-        // END deprecated
 
         $all = Database::getDb()->getAll($query);
 
@@ -654,9 +652,7 @@ class SearchTest extends UnitTestCase
     {
         $this->cleanTmpDir();
         $sArticleTable = $this->tableViewNameGenerator->getViewName('oxarticles', 1);
-        // @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
         $sFix = " and ( (  $sArticleTable.oxtitle like '%a%' or  $sArticleTable.oxshortdesc like '%a%' or  $sArticleTable.oxsearchkeys like '%a%' or  $sArticleTable.oxartnum like '%a%' )  ) ";
-        // END deprecated
 
         /** @var Search $oSearch */
         $oSearch = oxNew('oxSearch');

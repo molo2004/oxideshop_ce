@@ -1205,8 +1205,7 @@ class DetailsTest extends \OxidTestCase
         if ($this->getTestConfig()->getShopEdition() == 'EE') {
             $this->markTestSkipped('This test is for Community or Professional edition only.');
         }
-        $oView = $this->getMock($this->getProxyClassName('Details'), array('getTags'));
-        $oView->expects($this->any())->method('getTags')->will($this->returnValue('test_tags'));
+        $oView = $this->getProxyClass('Details');
 
         $oBaseView = oxNew('oxUBase');
         $sBaseViewId = $oBaseView->getViewId();
