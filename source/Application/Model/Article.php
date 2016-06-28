@@ -861,9 +861,8 @@ class Article extends \oxI18n implements ArticleInterface, \oxIUrl
      */
     public function isMultilingualField($sFieldName)
     {
-        switch ($sFieldName) {
-            case "oxlongdesc":
-                return true;
+        if ('oxlongdesc' == $sFieldName) {
+            return true;
         }
 
         return parent::isMultilingualField($sFieldName);
