@@ -258,9 +258,7 @@ class LocatorTest extends \OxidTestCase
 
     public function testSetVendorLocatorData()
     {
-        // seo off
-        $this->getConfig()->setConfigParam('blSeoMode', false);
-        oxRegistry::getUtils()->seoIsActive(true);
+        $this->switchOffSeo();
 
         $myConfig = $this->getConfig();
 
@@ -352,9 +350,7 @@ class LocatorTest extends \OxidTestCase
 
     public function testSetManufacturerLocatorData()
     {
-        // seo off
-        $this->getConfig()->setConfigParam('blSeoMode', false);
-        oxRegistry::getUtils()->seoIsActive(true);
+        $this->switchOffSeo();
 
         $myConfig = $this->getConfig();
 
@@ -449,8 +445,7 @@ class LocatorTest extends \OxidTestCase
 
     public function testSetSearchLocatorData()
     {
-        $this->getConfig()->setConfigParam('blSeoMode', false);
-        oxRegistry::getUtils()->seoIsActive(true);
+        $this->switchOffSeo();
 
         $config = $this->getConfig();
 
@@ -494,9 +489,7 @@ class LocatorTest extends \OxidTestCase
 
     public function testSetSearchLocatorDataFromVendor()
     {
-        // seo off
-        $this->getConfig()->setConfigParam('blSeoMode', false);
-        oxRegistry::getUtils()->seoIsActive(true);
+        $this->switchOffSeo();
 
         $config = $this->getConfig();
 
@@ -543,8 +536,7 @@ class LocatorTest extends \OxidTestCase
 
     public function testSetSearchLocatorDataFromCat()
     {
-        $this->getConfig()->setConfigParam('blSeoMode', false);
-        oxRegistry::getUtils()->seoIsActive(true);
+        $this->switchOffSeo();
 
         $myConfig = $this->getConfig();
 
@@ -592,9 +584,7 @@ class LocatorTest extends \OxidTestCase
         oxTestModules::addFunction('oxarticlelist', 'loadRecommArticleIds', '{parent::loadRecommArticleIds($aA[0], " order by oxobject2list.oxobjectid asc" );}');
         $myConfig = $this->getConfig();
 
-        // seo off
-        $this->setConfigParam('blSeoMode', false);
-        oxRegistry::getUtils()->seoIsActive(true);
+        $this->switchOffSeo();
 
         $myDB = oxDb::getDB();
         $sShopId = $myConfig->getShopId();
@@ -638,9 +628,7 @@ class LocatorTest extends \OxidTestCase
         oxTestModules::addFunction('oxarticlelist', 'loadRecommArticleIds', '{parent::loadRecommArticleIds($aA[0], " order by oxobject2list.oxobjectid asc" );}');
         $myConfig = $this->getConfig();
 
-        // seo off
-        $this->setConfigParam('blSeoMode', false);
-        oxRegistry::getUtils()->seoIsActive(true);
+        $this->switchOffSeo();
 
         $myDB = oxDb::getDB();
         $sShopId = $myConfig->getShopId();
@@ -882,6 +870,15 @@ class LocatorTest extends \OxidTestCase
         $this->assertSame('1234567', $locator->_oBackProduct->getId());
         $this->assertSame('6b6e718666bc8867719ab25a8020a978', $locator->_oNextProduct->getId());
 
+    }
+
+    /**
+     * Switch the SEO functionality off and reset the seo use cache.
+     */
+    protected function switchOffSeo()
+    {
+        $this->setConfigParam('blSeoMode', false);
+        oxRegistry::getUtils()->seoIsActive(true);
     }
 
     /**
