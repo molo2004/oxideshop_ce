@@ -46,7 +46,7 @@ class SearchTest extends UnitTestCase
     {
         parent::setUp();
         $this->_oSearchHandler = oxNew('oxSearch');
-        $this->tableViewNameGenerator = new TableViewNameGenerator();
+        $this->tableViewNameGenerator = oxNew('oxTableViewNameGenerator');
         $this->getConfig()->setConfigParam('blUseTimeCheck', true);
         $this->cleanUpTable('oxarticles');
         $this->cleanUpTable('oxobject2category');
@@ -651,15 +651,16 @@ class SearchTest extends UnitTestCase
     public function testGetWhere()
     {
         $this->cleanTmpDir();
-        $sArticleTable = $this->tableViewNameGenerator->getViewName('oxarticles', 1);
-        $sFix = " and ( (  $sArticleTable.oxtitle like '%a%' or  $sArticleTable.oxshortdesc like '%a%' or  $sArticleTable.oxsearchkeys like '%a%' or  $sArticleTable.oxartnum like '%a%' )  ) ";
+        
+        $articleTable = $this->tableViewNameGenerator->getViewName('oxarticles', 1);
+        $expectedWhere = " and ( (  $articleTable.oxtitle like '%a%' or  $articleTable.oxshortdesc like '%a%' or  $articleTable.oxsearchkeys like '%a%' or  $articleTable.oxartnum like '%a%' )  ) ";
 
-        /** @var Search $oSearch */
-        $oSearch = oxNew('oxSearch');
-        $oSearch->setLanguage(1);
-        $sQ = $oSearch->UNITgetWhere('a');
+        /** @var Search $search */
+        $search = oxNew('oxSearch');
+        $search->setLanguage(1);
+        $where = $search->UNITgetWhere('a');
 
-        $this->assertEquals($sFix, $sQ);
+        $this->assertEquals($expectedWhere, $where);
     }
 
     // testing SQL builder
