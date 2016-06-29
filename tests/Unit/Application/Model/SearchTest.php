@@ -307,7 +307,7 @@ class SearchTest extends UnitTestCase
         // testing if article count in list is <= 'iNrOfCatArticles' = 10;
         $count = 8;
         if ($this->getConfig()->getEdition() === 'EE') {
-            $count = 5;
+            $count = 4;
         }
         $this->assertEquals($count, $searchList->count());
         $this->assertEquals(count($all), $allArticlesCount);
