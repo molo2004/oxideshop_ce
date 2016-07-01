@@ -115,6 +115,7 @@ class SearchTest extends \OxidTestCase
 
         $result = array_keys($search->getArticleList()->getArray());
         sort($result);
+        sort($expectedArticles);
 
         $this->assertEquals($expectedArticles, $result);
     }
