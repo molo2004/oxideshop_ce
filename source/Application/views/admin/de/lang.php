@@ -403,7 +403,6 @@ $aLang = array(
 'ARTICLE_LIST_MENUSUBITEM'                                 => 'Artikel',
 'ARTICLE_MAIN_ERRORSAVINGARTICLE'                          => 'Warnung: Artikelnummer bereits vorhanden!',
 'ARTICLE_MAIN_PARENTNOTBUYABLE'                            => 'Achtung: Vaterartikel kann nicht gekauft werden.',
-'ARTICLE_MAIN_INVALIDTAGSFOUND'                            => 'Achtung: Unzulässige Tags wurden entfernt.',
 'ARTICLE_MAIN_ALDPRICE'                                    => 'Alt. Preise',
 'ARTICLE_MAIN_NONE'                                        => '-- keine --',
 'ARTICLE_MAIN_GOTO'                                        => 'Gehe zu',
