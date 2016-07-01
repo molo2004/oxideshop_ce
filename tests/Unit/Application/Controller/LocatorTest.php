@@ -524,7 +524,7 @@ class LocatorTest extends \OxidTestCase
         $oSearch = $oLocatorTarget->getActSearch();
 
         $expectedPosition = 2;
-        $expectedCount = $this->getTestConfig()->getShopEdition() == 'EE' ? 14 : 5;
+        $expectedCount = $this->getTestConfig()->getShopEdition() == 'EE' ? 12 : 5;
         $this->assertEquals($expectedPosition, $oSearch->iProductPos);
         $this->assertEquals($expectedCount, $oSearch->iCntOfProd);
 
