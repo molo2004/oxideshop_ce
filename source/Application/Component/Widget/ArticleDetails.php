@@ -1014,20 +1014,6 @@ class ArticleDetails extends \oxWidget
     }
 
     /**
-     * Returns tag separator
-     *
-     * @deprecated v5.3 (2016-05-04); Tags will be moved to own module.
-     *
-     * @return string
-     */
-    public function getTagSeparator()
-    {
-        $sSeparator = $this->getConfig()->getConfigParam("sTagSeparator");
-
-        return $sSeparator;
-    }
-
-    /**
      * Runs additional checks for article.
      *
      * @param oxUtils  $myUtils  General utils
