@@ -19,7 +19,8 @@
  * @copyright (C) OXID eSales AG 2003-2016
  * @version       OXID eShop CE
  */
-namespace OxidEsales\Eshop\Core\Database;
+
+namespace OxidEsales\Eshop\Core\Database\Adapter\Doctrine;
 
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
@@ -28,7 +29,9 @@ use Doctrine\DBAL\Driver\PDOException;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
 use OxidEsales\Eshop;
-use OxidEsales\Eshop\Core\Database\Adapter\DoctrineResultSet;
+use OxidEsales\Eshop\Core\Database\Adapter\Doctrine\EmptyResultSet;
+use OxidEsales\Eshop\Core\Database\Adapter\Doctrine\ResultSet;
+use OxidEsales\Eshop\Core\Database\Adapter\DatabaseInterface;
 use OxidEsales\Eshop\Core\Exception\DatabaseConnectionException;
 use OxidEsales\Eshop\Core\Exception\DatabaseException;
 use OxidEsales\Eshop\Core\Exception\StandardException;
@@ -38,7 +41,7 @@ use OxidEsales\Eshop\Core\Exception\StandardException;
  *
  * @package OxidEsales\Eshop\Core\Database
  */
-class Doctrine implements DatabaseInterface
+class Database implements DatabaseInterface
 {
 
     /**
@@ -470,7 +473,7 @@ class Doctrine implements DatabaseInterface
      *
      * @throws DatabaseException The exception, that can occur while running the sql statement.
      *
-     * @return DoctrineResultSet The result of the given query.
+     * @return ResultSet The result of the given query.
      */
     public function select($sqlSelect, $parameters = array(), $executeOnSlave = true)
     {
@@ -487,7 +490,7 @@ class Doctrine implements DatabaseInterface
              */
             /** @var \Doctrine\DBAL\Driver\Statement $statement Statement is prepared and executed by executeQuery() */
             $statement = $this->getConnection()->executeQuery($sqlSelect, $parameters);
-            $result = new DoctrineResultSet($statement);
+            $result = new ResultSet($statement);
         } catch (DBALException $exception) {
             $exception = $this->convertException($exception);
             $this->handleException($exception);
@@ -512,7 +515,7 @@ class Doctrine implements DatabaseInterface
      *
      * @throws DatabaseException
      *
-     * @return DoctrineResultSet The result of the given query.
+     * @return ResultSet The result of the given query.
      */
     public function selectLimit($sqlSelect, $rowCount = -1, $offset = -1, $parameters = false, $executeOnSlave = true)
     {
