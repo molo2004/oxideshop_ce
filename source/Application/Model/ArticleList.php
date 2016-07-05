@@ -24,6 +24,7 @@ namespace OxidEsales\Eshop\Application\Model;
 
 use oxRegistry;
 use oxDb;
+use OxidEsales\Eshop\Core\Registry;
 
 /**
  * Article list manager.
@@ -525,7 +526,7 @@ class ArticleList extends \oxList
         $sArticleTable = getViewName('oxarticles');
 
         // longdesc field now is kept on different table
-        $sDescJoin = $this->getDescriptionJoin($sArticleTable);
+        $sDescJoin = $this->getDescriptionJoin();
 
         // load the articles
         $sSelect = "select $sArticleTable.oxid, $sArticleTable.oxtimestamp from $sArticleTable $sDescJoin where ";
@@ -1235,12 +1236,11 @@ class ArticleList extends \oxList
     /**
      * Get description join. Needed in case of searching for data in table oxartextends or its views.
      *
-     * @param string $table
-     *
      * @return string
      */
-    protected function getDescriptionJoin($table)
+    protected function getDescriptionJoin()
     {
+        $table = Registry::get('oxTableViewNameGenerator')->getViewName('oxarticles');
         $descriptionJoin = '';
         $searchColumns = $this->getConfig()->getConfigParam('aSearchCols');
 
@@ -1265,7 +1265,7 @@ class ArticleList extends \oxList
         $searchTable = $table;
 
         if ($field == 'oxlongdesc') {
-            $searchTable = getViewName('oxartextends');
+            $searchTable = Registry::get('oxTableViewNameGenerator')->getViewName('oxartextends');
         }
 
         return $searchTable;

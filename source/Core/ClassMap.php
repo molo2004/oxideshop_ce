@@ -463,7 +463,6 @@ class ClassMap extends \OxidEsales\Eshop\Core\Edition\ClassMap
             'oxaddress' => 'OxidEsales\Eshop\Application\Model\Address',
             'oxamountpricelist' => 'OxidEsales\Eshop\Application\Model\AmountPriceList',
             'oxarticlelist' => 'OxidEsales\Eshop\Application\Model\ArticleList',
-            'oxarticletaglist' => 'OxidEsales\Eshop\Application\Model\ArticleTagList',
             'oxattribute' => 'OxidEsales\Eshop\Application\Model\Attribute',
             'oxattributelist' => 'OxidEsales\Eshop\Application\Model\AttributeList',
             'oxbasket' => 'OxidEsales\Eshop\Application\Model\Basket',

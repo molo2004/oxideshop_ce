@@ -606,7 +606,7 @@ class LocatorTest extends \OxidTestCase
         $oLocatorTarget->expects($this->any())->method('setSearchTitle');
         $oLocatorTarget->expects($this->any())->method('getSearchTitle');
         $oLocatorTarget->expects($this->any())->method('getActiveRecommList')->will($this->returnValue($oRecomm));
-        $oLocatorTarget->expects($this->any())->method('getLinkType')->will($this->returnValue(OXARTICLE_LINKTYPE_TAG));
+        $oLocatorTarget->expects($this->any())->method('getLinkType')->will($this->returnValue(OXARTICLE_LINKTYPE_RECOMM));
 
         $this->setRequestParameter("searchrecomm", 'test');
         $oLocator = new testOxLocator();

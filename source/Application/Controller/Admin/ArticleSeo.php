@@ -126,7 +126,7 @@ class ArticleSeo extends \Object_Seo
         if ($this->_aSelectionList === null) {
             $this->_aSelectionList = array();
 
-            $oProduct = oxNew('oxArticle');
+            $oProduct = oxNew('OxidEsales\Eshop\Application\Model\Article');
             $oProduct->load($this->getEditObjectId());
 
             if ($oCatList = $this->_getCategoryList($oProduct)) {
@@ -295,16 +295,6 @@ class ArticleSeo extends \Object_Seo
     protected function _getAltSeoEntryId()
     {
         return $this->getEditObjectId();
-    }
-
-    /**
-     * Returns seo entry type
-     *
-     * @return string
-     */
-    protected function _getSeoEntryType()
-    {
-        return $this->_getType();
     }
 
     /**

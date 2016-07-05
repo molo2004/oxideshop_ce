@@ -892,18 +892,6 @@ class ArticleDetailsController extends \oxUBase
     }
 
     /**
-     * Template variable getter. Returns meta description
-     *
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        $meta = parent::getMetaDescription();
-
-        return $meta;
-    }
-
-    /**
      * Returns view canonical url
      *
      * @return string
