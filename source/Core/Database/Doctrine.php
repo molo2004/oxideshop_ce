@@ -28,7 +28,6 @@ use Doctrine\DBAL\Driver\PDOException;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
 use OxidEsales\Eshop;
-use OxidEsales\Eshop\Core\Database\Adapter\DoctrineEmptyResultSet;
 use OxidEsales\Eshop\Core\Database\Adapter\DoctrineResultSet;
 use OxidEsales\Eshop\Core\Exception\DatabaseConnectionException;
 use OxidEsales\Eshop\Core\Exception\DatabaseException;
@@ -50,11 +49,6 @@ class Doctrine implements DatabaseInterface
      * @var \Doctrine\DBAL\Connection The database connection.
      */
     protected $connection = null;
-
-    /**
-     * @var int The number of rows affected by the last sql query.
-     */
-    protected $affectedRows = 0;
 
     /**
      * @var int The current fetch mode.
@@ -324,16 +318,6 @@ class Doctrine implements DatabaseInterface
     }
 
     /**
-     * Get the number of rows, which where changed during the last sql statement.
-     *
-     * @return int The number of rows affected by the sql statement.
-     */
-    public function affectedRows()
-    {
-        return $this->getAffectedRows();
-    }
-
-    /**
      * Quote a string in a way that it can be used as a identifier (i.e. table name or field name) in a SQL statement.
      *
      * @param string $string The string to be quoted as a identifier. 
@@ -433,7 +417,7 @@ class Doctrine implements DatabaseInterface
      *
      * @throws \InvalidArgumentException|DatabaseException
      *
-     * @return bool|DoctrineEmptyResultSet|DoctrineResultSet
+     * @return bool|integer
      */
     public function setTransactionIsolationLevel($level)
     {
@@ -458,14 +442,14 @@ class Doctrine implements DatabaseInterface
     }
 
     /**
-     * Execute the given query and return the corresponding result set.
+     * Execute the given query and return the number of affected rows.
      *
      * @param string $query      The query we want to execute.
      * @param array  $parameters The parameters for the given query.
      *
      * @throws DatabaseException
      *
-     * @return DoctrineEmptyResultSet|DoctrineResultSet
+     * @return integer The number of affected rows.
      */
     public function execute($query, $parameters = array())
     {
@@ -473,9 +457,7 @@ class Doctrine implements DatabaseInterface
         $parameters = $this->assureParameterIsAnArray($parameters);
         // END deprecated
 
-        $result = $this->executeUpdate($query, $parameters);
-
-        return $result;
+        return $this->executeUpdate($query, $parameters);
     }
 
     /**
@@ -506,8 +488,6 @@ class Doctrine implements DatabaseInterface
             /** @var \Doctrine\DBAL\Driver\Statement $statement Statement is prepared and executed by executeQuery() */
             $statement = $this->getConnection()->executeQuery($sqlSelect, $parameters);
             $result = new DoctrineResultSet($statement);
-
-            $this->setAffectedRows($result->count());
         } catch (DBALException $exception) {
             $exception = $this->convertException($exception);
             $this->handleException($exception);
@@ -600,8 +580,7 @@ class Doctrine implements DatabaseInterface
     }
 
     /**
-     * Executes an SQL INSERT/UPDATE/DELETE query with the given parameters, sets the number of affected rows and returns
-     * an empty DoctrineResultSet.
+     * Executes an SQL INSERT/UPDATE/DELETE query with the given parameters and returns the number of affected.
      *
      * This method supports PDO binding types as well as DBAL mapping types.
      *
@@ -611,7 +590,7 @@ class Doctrine implements DatabaseInterface
      *
      * @throws DatabaseException
      *
-     * @return DoctrineEmptyResultSet
+     * @return integer The number of affected rows.
      */
     public function executeUpdate($query, $parameters = array(), $types = array())
     {
@@ -621,15 +600,12 @@ class Doctrine implements DatabaseInterface
 
         try {
             $affectedRows = $this->getConnection()->executeUpdate($query, $parameters, $types);
-            $this->setAffectedRows($affectedRows);
         } catch (DBALException $exception) {
             $exception = $this->convertException($exception);
             $this->handleException($exception);
         }
 
-        $result = new DoctrineEmptyResultSet();
-
-        return $result;
+        return $affectedRows;
     }
 
     /**
@@ -640,26 +616,6 @@ class Doctrine implements DatabaseInterface
     protected function getConnection()
     {
         return $this->connection;
-    }
-
-    /**
-     * Set the number of the rows, changed by the last query.
-     *
-     * @param int $affectedRows How many rows did the last query changed?
-     */
-    protected function setAffectedRows($affectedRows)
-    {
-        $this->affectedRows = $affectedRows;
-    }
-
-    /**
-     * Get the number of the rows, changed by the last query.
-     *
-     * @return int How many rows did the last query changed?
-     */
-    protected function getAffectedRows()
-    {
-        return $this->affectedRows;
     }
 
     /**

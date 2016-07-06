@@ -307,7 +307,8 @@ interface DatabaseInterface
     public function quoteArray($array);
 
     /**
-     * Quote every string in the given array.
+     * Quote a string in a way, that it can be used as a identifier (i.e. table name or field name) in a sql statement.
+     * You are strongly encouraged to always use quote identifiers.
      *
      * @param string $string The string to be quoted.
      *

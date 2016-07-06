@@ -794,7 +794,7 @@ class Base extends \oxSuperCfg
     }
 
     /**
-     * Delete this object from the database, returns true on success.
+     * Delete this object from the database, returns true if entry was deleted.
      *
      * @param string $oxid Object ID(default null)
      *
@@ -812,8 +812,8 @@ class Base extends \oxSuperCfg
         $database = oxDb::getDb(oxDb::FETCH_MODE_ASSOC);
         $coreTable = $this->getCoreTableName();
         $deleteQuery = "delete from {$coreTable} where oxid = " . $database->quote($oxid);
-        $database->execute($deleteQuery);
-        if ($blDelete = (bool) $database->affectedRows()) {
+        $affectedRows = $database->execute($deleteQuery);
+        if ($blDelete = (bool) $affectedRows) {
             $this->onChange(ACTION_DELETE, $oxid);
         }
 

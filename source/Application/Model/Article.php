@@ -2153,7 +2153,7 @@ class Article extends \oxI18n implements ArticleInterface, \oxIUrl
 
     /**
      * Deletes record and other information related to this article such as images from DB,
-     * also removes variants. Returns true on success.
+     * also removes variants. Returns true if entry was deleted.
      *
      * @param string $sOXID Article id
      *
@@ -2175,15 +2175,15 @@ class Article extends \oxI18n implements ArticleInterface, \oxIUrl
         $this->_onChangeResetCounts($sOXID, $this->oxarticles__oxvendorid->value, $this->oxarticles__oxmanufacturerid->value);
 
         // delete self
-        parent::delete($sOXID);
+        $deleted = parent::delete($sOXID);
 
-        $rs = $this->_deleteRecords($sOXID);
+        $this->_deleteRecords($sOXID);
 
         oxRegistry::get("oxSeoEncoderArticle")->onDeleteArticle($this);
 
         $this->onChange(ACTION_DELETE, $sOXID, $this->oxarticles__oxparentid->value);
 
-        return $rs->EOF;
+        return $deleted;
     }
 
     /**
@@ -2214,7 +2214,7 @@ class Article extends \oxI18n implements ArticleInterface, \oxIUrl
 
     /**
      * Recursive function. Updates quantity of sold articles.
-     * Return true on success
+     * Return true if amount was changed in database.
      *
      * @param float $dAmount Number of articles sold
      *
@@ -2240,7 +2240,7 @@ class Article extends \oxI18n implements ArticleInterface, \oxIUrl
             }
         }
 
-        return $rs;
+        return (bool) $rs;
     }
 
     /**
@@ -2252,7 +2252,7 @@ class Article extends \oxI18n implements ArticleInterface, \oxIUrl
     {
         $oDb = oxDb::getDb();
 
-        return $oDb->execute("update oxarticles set oxarticles.oxremindactive = 2 where oxarticles.oxid = " . $oDb->quote($this->oxarticles__oxid->value));
+        return (bool) $oDb->execute("update oxarticles set oxarticles.oxremindactive = 2 where oxarticles.oxid = " . $oDb->quote($this->oxarticles__oxid->value));
     }
 
     /**
@@ -2263,11 +2263,9 @@ class Article extends \oxI18n implements ArticleInterface, \oxIUrl
     public function save()
     {
         $this->_assignParentDependFields();
-
-        if (($blRet = parent::save())) {
-            // saving long description
-            $this->_saveArtLongDesc();
-        }
+        $blRet = parent::save();
+        // saving long description
+        $this->_saveArtLongDesc();
 
         return $blRet;
     }
@@ -4522,9 +4520,7 @@ class Article extends \oxI18n implements ArticleInterface, \oxIUrl
         $oDb->execute($sDelete);
 
         $sDelete = 'delete from oxobject2list where oxobjectid = ' . $articleId . ' ';
-        $rs = $oDb->execute($sDelete);
-
-        return $rs;
+        $oDb->execute($sDelete);
     }
 
     /**
