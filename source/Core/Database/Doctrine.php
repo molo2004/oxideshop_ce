@@ -330,7 +330,9 @@ class Doctrine implements DatabaseInterface
         if (!$identifierQuoteCharacter) {
             $identifierQuoteCharacter = '`';
         }
-        return $this->getConnection()->quoteIdentifier(trim($string, $identifierQuoteCharacter));
+        $string = trim(str_replace($identifierQuoteCharacter, '', $string));
+
+        return $this->getConnection()->quoteIdentifier($string);
     }
 
     /**
