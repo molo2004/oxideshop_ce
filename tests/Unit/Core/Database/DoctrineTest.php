@@ -148,6 +148,16 @@ class DoctrineTest extends UnitTestCase
                 'An already quoted string will be quoted with "' . $identifierQuoteCharacter . '"'
             ],
             [
+                $identifierQuoteCharacter . $identifierQuoteCharacter .$identifierQuoteCharacter . 'string to be quoted' . $identifierQuoteCharacter . $identifierQuoteCharacter . $identifierQuoteCharacter,
+                $identifierQuoteCharacter . 'string to be quoted' . $identifierQuoteCharacter,
+                'An already quoted string will be quoted with "' . $identifierQuoteCharacter . '"'
+            ],
+            [
+                $identifierQuoteCharacter . 'string to be quoted' . $identifierQuoteCharacter . $identifierQuoteCharacter . $identifierQuoteCharacter,
+                $identifierQuoteCharacter . 'string to be quoted' . $identifierQuoteCharacter,
+                'An already quoted string will be quoted with "' . $identifierQuoteCharacter . '"'
+            ],
+            [
                 $identifierQuoteCharacter . 'string to ' . $identifierQuoteCharacter . ' be quoted' . $identifierQuoteCharacter,
                 $identifierQuoteCharacter . 'string to ' . $identifierQuoteCharacter . $identifierQuoteCharacter . ' be quoted' . $identifierQuoteCharacter,
                 'An already quoted string will be quoted with "' . $identifierQuoteCharacter . '"'
