@@ -363,7 +363,7 @@ class DoctrineTest extends DatabaseInterfaceImplementationTest
             [
                 // A arbitrary string, which contains a backtick, will be converted in a column name
                 'columnName ` columnName',
-                'Unknown column \'columnName ` columnName\' in \'order clause\''
+                'Unknown column \'columnName  columnName\' in \'order clause\''
             ],
         ];
     }
