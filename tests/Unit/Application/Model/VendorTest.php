@@ -173,12 +173,12 @@ class VendorTest extends \OxidTestCase
         oxTestModules::addFunction("oxutils", "seoIsActive", "{return true;}");
 
         // fetching first vendor from db
-        $sQ = 'select oxid from oxvendor where oxvendor.oxshopid = "' . $this->getConfig()->getShopID() . '"';
+        $sQ = 'select oxid from oxvendor where oxvendor.oxshopid = "' . $this->getConfig()->getShopID() . '" order by oxid desc';
 
         $myDB = oxDb::getDB();
         $sVendorId = $myDB->getOne($sQ);
 
-        $sQ = 'select oxtitle from oxvendor where oxvendor.oxshopid = "' . $this->getConfig()->getShopID() . '"';
+        $sQ = 'select oxtitle from oxvendor where oxvendor.oxshopid = "' . $this->getConfig()->getShopID() . '" order by oxid desc';
         $sVendorTitle = $myDB->getOne($sQ);
 
         $oVendor = oxNew('oxvendor');
@@ -196,10 +196,10 @@ class VendorTest extends \OxidTestCase
         oxTestModules::addFunction("oxutils", "seoIsActive", "{return true;}");
 
         // fetching first vendor from db
-        $sQ = 'select oxid from oxvendor where oxvendor.oxshopid = "' . $myConfig->getShopID() . '"';
+        $sQ = 'select oxid from oxvendor where oxvendor.oxshopid = "' . $myConfig->getShopID() . '" order by oxid desc';
         $sVendorId = $myDB->getOne($sQ);
 
-        $sQ = 'select oxtitle_1 from oxvendor where oxvendor.oxshopid = "' . $myConfig->getShopID() . '"';
+        $sQ = 'select oxtitle_1 from oxvendor where oxvendor.oxshopid = "' . $myConfig->getShopID() . '" order by oxid desc';
         $sVendorTitle = $myDB->getOne($sQ);
 
         $oVendor = oxNew('oxvendor');
@@ -230,12 +230,12 @@ class VendorTest extends \OxidTestCase
         oxTestModules::addFunction("oxutilsserver", "getServerVar", "{ \$aArgs = func_get_args(); if ( \$aArgs[0] === 'HTTP_HOST' ) { return '" . $this->getConfig()->getShopUrl() . "'; } elseif ( \$aArgs[0] === 'SCRIPT_NAME' ) { return ''; } else { return \$_SERVER[\$aArgs[0]]; } }");
 
         // fetching first vendor from db
-        $sQ = 'select oxid from oxvendor where oxvendor.oxshopid = "' . $this->getConfig()->getShopID() . '"';
+        $sQ = 'select oxid from oxvendor where oxvendor.oxshopid = "' . $this->getConfig()->getShopID() . '" order by oxid desc';
 
         $myDB = oxDb::getDB();
         $sVendorId = $myDB->getOne($sQ);
 
-        $sQ = 'select oxtitle from oxvendor where oxvendor.oxshopid = "' . $this->getConfig()->getShopID() . '"';
+        $sQ = 'select oxtitle from oxvendor where oxvendor.oxshopid = "' . $this->getConfig()->getShopID() . '" order by oxid desc';
         $sVendorTitle = $myDB->getOne($sQ);
 
         $oVendor = oxNew('oxvendor');
@@ -253,10 +253,10 @@ class VendorTest extends \OxidTestCase
         oxTestModules::addFunction("oxutils", "seoIsActive", "{return true;}");
 
         // fetching first vendor from db
-        $sQ = 'select oxid from oxvendor where oxvendor.oxshopid = "' . $myConfig->getShopID() . '"';
+        $sQ = 'select oxid from oxvendor where oxvendor.oxshopid = "' . $myConfig->getShopID() . '" order by oxid desc';
         $sVendorId = $myDB->getOne($sQ);
 
-        $sQ = 'select oxtitle_1 from oxvendor where oxvendor.oxshopid = "' . $myConfig->getShopID() . '"';
+        $sQ = 'select oxtitle_1 from oxvendor where oxvendor.oxshopid = "' . $myConfig->getShopID() . '" order by oxid desc';
         $sVendorTitle = $myDB->getOne($sQ);
 
         $oVendor = oxNew('oxvendor');
