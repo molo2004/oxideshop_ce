@@ -64,9 +64,9 @@ class DbMetaDataHandlerTest extends \OxidTestCase
                      PRIMARY KEY (`OXID`),
                      KEY `OXTITLE` (`OXTITLE`),
                      KEY `OXTITLE_1` (`OXTITLE_1`),
-                     FULLTEXT KEY `OXLONGDESC` (`OXLONGDESC`),
-                     FULLTEXT KEY `OXLONGDESC_1` (`OXLONGDESC_1`)
-                  ) ENGINE = MyISAM";
+                     KEY `OXLONGDESC` (`OXLONGDESC`(255)),
+                     KEY `OXLONGDESC_1` (`OXLONGDESC_1`(255))
+                  ) ENGINE = InnoDB";
 
         oxDb::getDb()->execute($sSql);
     }
@@ -76,7 +76,7 @@ class DbMetaDataHandlerTest extends \OxidTestCase
      */
     protected function createTestTableWithoutIndices()
     {
-        $sSql = "CREATE TABLE `testDbMetaDataHandlerWithoutIndices` (`OXID` char(32) NOT NULL) ENGINE = MyISAM";
+        $sSql = "CREATE TABLE `testDbMetaDataHandlerWithoutIndices` (`OXID` char(32) NOT NULL) ENGINE = InnoDB";
 
         oxDb::getDb()->execute($sSql);
     }
@@ -301,13 +301,15 @@ class DbMetaDataHandlerTest extends \OxidTestCase
         $dbMetaDataHandler = oxNew('OxidEsales\Eshop\Core\DbMetaDataHandler');
 
         $expectedSqls = [
-            'ALTER TABLE `testDbMetaDataHandler` ADD FULLTEXT KEY  (`OXLONGDESC_4`)',
-            "ALTER TABLE `testDbMetaDataHandler` ADD FULLTEXT KEY  (`OXLONGDESC_5`)",
-            "ALTER TABLE `testDbMetaDataHandler_set1` ADD FULLTEXT KEY  (`OXLONGDESC_8`)",
-            "ALTER TABLE `testDbMetaDataHandler_set2` ADD FULLTEXT KEY  (`OXLONGDESC_20`)"
+            "ALTER TABLE `testDbMetaDataHandler` ADD KEY  (`OXTITLE_4`)",
+            "ALTER TABLE `testDbMetaDataHandler` ADD KEY  (`OXLONGDESC_4`(255))",
+            "ALTER TABLE `testDbMetaDataHandler` ADD KEY  (`OXLONGDESC_5`(255))",
+            "ALTER TABLE `testDbMetaDataHandler_set1` ADD KEY  (`OXLONGDESC_8`(255))",
+            "ALTER TABLE `testDbMetaDataHandler_set2` ADD KEY  (`OXLONGDESC_20`(255))"
         ];
 
         $resultSqls = [
+            $dbMetaDataHandler->getAddFieldIndexSql("testDbMetaDataHandler", "OXTITLE", "OXTITLE_4"),
             $dbMetaDataHandler->getAddFieldIndexSql("testDbMetaDataHandler", "OXLONGDESC", "OXLONGDESC_4"),
             $dbMetaDataHandler->getAddFieldIndexSql("testDbMetaDataHandler", "OXLONGDESC", "OXLONGDESC_5"),
             $dbMetaDataHandler->getAddFieldIndexSql("testDbMetaDataHandler", "OXLONGDESC", "OXLONGDESC_8", "testDbMetaDataHandler_set1"),
@@ -469,18 +471,18 @@ class DbMetaDataHandlerTest extends \OxidTestCase
         $this->assertEquals("OXTITLE", $aIndexes[1]["Column_name"]);
         $this->assertEquals("OXTITLE_1", $aIndexes[2]["Key_name"]);
         $this->assertEquals("OXTITLE_1", $aIndexes[2]["Column_name"]);
-        $this->assertEquals("OXTITLE_2", $aIndexes[3]["Key_name"]);
-        $this->assertEquals("OXTITLE_2", $aIndexes[3]["Column_name"]);
+        $this->assertEquals("OXTITLE_2", $aIndexes[5]["Key_name"]);
+        $this->assertEquals("OXTITLE_2", $aIndexes[5]["Column_name"]);
 
 
         //checking newly added index for column OXLONGDESC
-        $this->assertEquals("OXLONGDESC", $aIndexes[4]["Key_name"]);
-        $this->assertEquals("OXLONGDESC", $aIndexes[4]["Column_name"]);
-        $this->assertEquals("OXLONGDESC_1", $aIndexes[5]["Key_name"]);
-        $this->assertEquals("OXLONGDESC_1", $aIndexes[5]["Column_name"]);
+        $this->assertEquals("OXLONGDESC", $aIndexes[3]["Key_name"]);
+        $this->assertEquals("OXLONGDESC", $aIndexes[3]["Column_name"]);
+        $this->assertEquals("OXLONGDESC_1", $aIndexes[4]["Key_name"]);
+        $this->assertEquals("OXLONGDESC_1", $aIndexes[4]["Column_name"]);
         $this->assertEquals("OXLONGDESC_2", $aIndexes[6]["Key_name"]);
         $this->assertEquals("OXLONGDESC_2", $aIndexes[6]["Column_name"]);
-        $this->assertEquals("FULLTEXT", $aIndexes[6]["Index_type"]);
+        $this->assertEquals("BTREE", $aIndexes[6]["Index_type"]);
     }
 
     /**
