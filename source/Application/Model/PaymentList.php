@@ -111,7 +111,7 @@ class PaymentList extends \oxList
                 if( exists( select 1 from oxobject2group as ss3, $sGroupTable where $sGroupTable.oxid=ss3.oxgroupsid and ss3.OXOBJECTID={$sTable}.OXID limit 1 ),
                     {$sGroupSql},
                     1)
-                )  order by {$sTable}.oxsort asc, {$sTable}.oxid DESC";
+                )  order by {$sTable}.oxsort asc ";
 
         return $sQ;
     }
