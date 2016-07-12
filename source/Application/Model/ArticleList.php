@@ -310,7 +310,7 @@ class ArticleList extends \oxList
                               left join $sViewName on $sViewName.oxid = oxactions2article.oxactionid
                               where oxactions2article.oxshopid = '$sShopID' and oxactions2article.oxactionid = $sActionID and $sActiveSql
                               and $sArticleTable.oxid is not null and " . $oBaseObject->getSqlActiveSnippet() . "
-                              order by oxactions2article.oxsort $sLimit";
+                              order by oxactions2article.oxsort, oxid ASC $sLimit";
 
         $this->selectString($sSelect);
     }
