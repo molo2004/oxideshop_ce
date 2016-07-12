@@ -29,6 +29,51 @@ use OxidEsales\Eshop\Tests\Acceptance\AdminTestCase;
 class SearchAndSortingAdminTest extends AdminTestCase
 {
     /**
+     * Sets default language to English.
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->getTranslator()->setLanguage(1);
+
+        $queries = array();
+        $queries[] = "UPDATE oxcategories set OXSORT = (OXSORT+500)";
+        $queries[] = "UPDATE oxcategories set OXSORT = 1 WHERE oxid = 'testcategory0'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 2 WHERE oxid = 'testcat3'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 3 WHERE oxid = 'testcat5'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 4 WHERE oxid = 'testcategory1'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 5 WHERE oxid = 'testcat1'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 6 WHERE oxid = 'testcat9'";
+
+        foreach ($queries as $query) {
+            $this->executeSql($query);
+        }
+
+    }
+
+    /**
+     * TearDown
+     */
+    protected function tearDown()
+    {
+        $queries = array();
+        $queries[] = "UPDATE oxcategories set OXSORT = (OXSORT-500)";
+        $queries[] = "UPDATE oxcategories set OXSORT = 1 WHERE oxid = 'testcategory0'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 1 WHERE oxid = 'testcat3'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 1 WHERE oxid = 'testcat5'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 2 WHERE oxid = 'testcategory1'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 2 WHERE oxid = 'testcat1'";
+        $queries[] = "UPDATE oxcategories set OXSORT = 3 WHERE oxid = 'testcat9'";
+
+        foreach ($queries as $query) {
+            $this->executeSql($query);
+        }
+
+        parent::tearDown();
+    }
+
+
+    /**
      * searching countries
      *
      * @group search_sort
@@ -1324,6 +1369,7 @@ class SearchAndSortingAdminTest extends AdminTestCase
 
     /**
      * sorting Products
+     * sorting Products
      *
      * @group search_sort
      */
@@ -1723,26 +1769,27 @@ class SearchAndSortingAdminTest extends AdminTestCase
         $this->assertElementNotPresent("//tr[@id='row.4']/td[@class='listitem2 active']");
         $this->assertEquals("1", $this->getText("//tr[@id='row.1']/td[2]"));
         $this->assertEquals("Test category 0 [DE] šÄßüл", $this->getText("//tr[@id='row.1']/td[3]"));
-        $this->assertEquals("2", $this->getText("//tr[@id='row.2']/td[2]"));
+        $this->assertEquals("4", $this->getText("//tr[@id='row.2']/td[2]"));
         $this->assertEquals("Test category 1 [DE] šÄßüл", $this->getText("//tr[@id='row.2']/td[3]"));
         $this->clickAndWait("link=Sorting");
         $this->assertEquals("1", $this->getText("//tr[@id='row.1']/td[2]"));
         $this->assertEquals("Test category 0 [DE] šÄßüл", $this->getText("//tr[@id='row.1']/td[3]"));
-        $this->assertEquals("1", $this->getText("//tr[@id='row.2']/td[2]"));
+        $this->assertEquals("2", $this->getText("//tr[@id='row.2']/td[2]"));
         $this->assertEquals("3 [DE] category šÄßüл", $this->getText("//tr[@id='row.2']/td[3]"));
-        $this->assertEquals("1", $this->getText("//tr[@id='row.3']/td[2]"));
+        $this->assertEquals("3", $this->getText("//tr[@id='row.3']/td[2]"));
         $this->assertEquals("5 [DE] category šÄßüл", $this->getText("//tr[@id='row.3']/td[3]"));
-        $this->assertEquals("2", $this->getText("//tr[@id='row.4']/td[2]"));
+        $this->assertEquals("4", $this->getText("//tr[@id='row.4']/td[2]"));
         $this->assertEquals("Test category 1 [DE] šÄßüл", $this->getText("//tr[@id='row.4']/td[3]"));
         $this->clickAndWait("link=Title");
-        $this->assertEquals("2", $this->getText("//tr[@id='row.1']/td[2]"));
+        $this->assertEquals("5", $this->getText("//tr[@id='row.1']/td[2]"));
         $this->assertEquals("1 [DE] category šÄßüл", $this->getText("//tr[@id='row.1']/td[3]"));
-        $this->assertEquals("5", $this->getText("//tr[@id='row.2']/td[2]"));
+        $this->assertEquals("505", $this->getText("//tr[@id='row.2']/td[2]"));
         $this->assertEquals("2 [DE] category šÄßüл", $this->getText("//tr[@id='row.2']/td[3]"));
-        $this->assertEquals("1", $this->getText("//tr[@id='row.3']/td[2]"));
+        $this->assertEquals("2", $this->getText("//tr[@id='row.3']/td[2]"));
         $this->assertEquals("3 [DE] category šÄßüл", $this->getText("//tr[@id='row.3']/td[3]"));
         $this->assertEquals("Page 1 / 2", $this->getText("nav.site"));
         $this->assertElementPresent("//a[@id='nav.page.1'][@class='pagenavigation pagenavigationactive']");
+
         $this->clickAndWait("nav.next");
         $this->assertEquals("[last] [DE] category šÄßüл", $this->getText("//tr[@id='row.1']/td[3]"));
         $this->assertEquals("Page 2 / 2", $this->getText("nav.site"));
@@ -1760,18 +1807,18 @@ class SearchAndSortingAdminTest extends AdminTestCase
         $this->clickAndWait("link=Sorting");
         $this->assertEquals("1", $this->getText("//tr[@id='row.1']/td[2]"));
         $this->assertEquals("Test category 0 [EN] šÄßüл", $this->getText("//tr[@id='row.1']/td[3]"));
-        $this->assertEquals("1", $this->getText("//tr[@id='row.2']/td[2]"));
+        $this->assertEquals("2", $this->getText("//tr[@id='row.2']/td[2]"));
         $this->assertEquals("4 [EN] category šÄßüл", $this->getText("//tr[@id='row.2']/td[3]"));
-        $this->assertEquals("1", $this->getText("//tr[@id='row.3']/td[2]"));
+        $this->assertEquals("3", $this->getText("//tr[@id='row.3']/td[2]"));
         $this->assertEquals("6 [EN] category šÄßüл", $this->getText("//tr[@id='row.3']/td[3]"));
-        $this->assertEquals("2", $this->getText("//tr[@id='row.4']/td[2]"));
+        $this->assertEquals("4", $this->getText("//tr[@id='row.4']/td[2]"));
         $this->assertEquals("Test category 1 [EN] šÄßüл", $this->getText("//tr[@id='row.4']/td[3]"));
         $this->clickAndWait("link=Title");
-        $this->assertEquals("3", $this->getText("//tr[@id='row.1']/td[2]"));
+        $this->assertEquals("6", $this->getText("//tr[@id='row.1']/td[2]"));
         $this->assertEquals("1 [EN] category šÄßüл", $this->getText("//tr[@id='row.1']/td[3]"));
-        $this->assertEquals("6", $this->getText("//tr[@id='row.2']/td[2]"));
+        $this->assertEquals("506", $this->getText("//tr[@id='row.2']/td[2]"));
         $this->assertEquals("2 [EN] category šÄßüл", $this->getText("//tr[@id='row.2']/td[3]"));
-        $this->assertEquals("5", $this->getText("//tr[@id='row.3']/td[2]"));
+        $this->assertEquals("505", $this->getText("//tr[@id='row.3']/td[2]"));
         $this->assertEquals("3 [EN] category šÄßüл", $this->getText("//tr[@id='row.3']/td[3]"));
         $this->assertEquals("Page 1 / 2", $this->getText("nav.site"));
         $this->assertElementPresent("//a[@id='nav.page.1'][@class='pagenavigation pagenavigationactive']");
@@ -3393,15 +3440,6 @@ class SearchAndSortingAdminTest extends AdminTestCase
         $this->clickDeleteListItem(1);
         $this->assertElementNotPresent("nav.page.1");
         $this->assertEquals("1 EN product šÄßüл", $this->getText("//tr[@id='row.1']/td[5]"));
-    }
-
-    /**
-     * Sets default language to English.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->getTranslator()->setLanguage(1);
     }
 
     /**
