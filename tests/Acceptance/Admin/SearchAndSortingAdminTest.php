@@ -1958,8 +1958,13 @@ class SearchAndSortingAdminTest extends AdminTestCase
         $this->assertElementNotPresent("link=3 [EN] product šÄßüл comment");
         $this->type("where[oxreviews][oxcreate]", "2005");
         $this->clickAndWait("submitit");
-        $this->assertEquals("2005-12-30 11:11:00", $this->getText("//tr[@id='row.1']/td[1]"));
-        $this->assertEquals("2005-12-01 11:11:00", $this->getText("//tr[@id='row.2']/td[1]"));
+
+        $expected = array("2005-12-01 11:11:00", "2005-12-30 11:11:00");
+        $result = array($this->getText("//tr[@id='row.1']/td[1]"),
+                        $this->getText("//tr[@id='row.2']/td[1]"));
+        sort($result);
+
+        $this->assertEquals($expected, $result);
         $this->assertElementNotPresent("//tr[@id='row.3']/td[2]");
         $this->type("where[oxreviews][oxcreate]", "2005-12-30 11:11:00");
         $this->clickAndWait("submitit");
