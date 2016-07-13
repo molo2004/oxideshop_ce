@@ -33,7 +33,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestDownloadableFiles()
+    public function testDownloadableFiles()
     {
         $testConfig = $this->getTestConfig();
         if ($testConfig->isSubShop()) {
@@ -195,7 +195,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestDisplayingOrdersInfo()
+    public function testDisplayingOrdersInfo()
     {
         $this->updateSubshopOrders();
 
@@ -240,7 +240,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestEditingOrdersMain()
+    public function testEditingOrdersMain()
     {
         $this->updateSubshopOrders();
 
@@ -301,7 +301,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestEditingOrdersAddresses()
+    public function testEditingOrdersAddresses()
     {
         $this->updateSubshopOrders();
 
@@ -424,7 +424,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestEditingOrdersDelivery()
+    public function testEditingOrdersDelivery()
     {
         $this->updateSubshopOrders();
 
@@ -477,7 +477,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestEditingOrdersProducts()
+    public function testEditingOrdersProducts()
     {
         $this->markTestSkipped(" fix test after bug 0004624 fix , so we need to move test to integration test with correct information");
 
@@ -550,7 +550,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestEditingNotRegisteredUserOrder()
+    public function testEditingNotRegisteredUserOrder()
     {
         //not registered user creates the order
         $this->addToBasket("1001");
@@ -630,7 +630,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestCurrencyValues()
+    public function testCurrencyValues()
     {
         $this->loginAdmin("Master Settings", "Core Settings");
         $this->openTab("Settings");
@@ -646,7 +646,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestAutosaveOnChangingTabs()
+    public function testAutosaveOnChangingTabs()
     {
         $this->loginAdmin("Master Settings", "Core Settings");
         $this->openTab("System");
@@ -658,7 +658,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestSystemInfo()
+    public function testSystemInfo()
     {
         $this->loginAdmin("Service", "System Info");
         $this->assertTextPresent("Configuration", "System information is not loaded: Service -> System Info");
@@ -670,7 +670,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestSystemRequirements()
+    public function testSystemRequirements()
     {
         $this->loginAdmin("Service", "System health");
         $this->frame("edit");
@@ -682,7 +682,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestTools()
+    public function testTools()
     {
         $this->loginAdmin("Service", "Tools", "btn.help");
         $this->frame("edit");
@@ -695,7 +695,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestGenericImport()
+    public function testGenericImport()
     {
         $this->loginAdmin("Service", "Generic Import");
         $this->assertTextPresent("Uploading CSV file");
@@ -707,7 +707,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestProductExport()
+    public function testProductExport()
     {
         $testConfig = $this->getTestConfig();
         if ($testConfig->isSubShop()) {
@@ -813,7 +813,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestLoginToAdminInOtherLang()
+    public function testLoginToAdminInOtherLang()
     {
         $this->loginAdmin();
         $this->waitForText("Welcome to the OXID eShop Admin");
@@ -849,7 +849,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestNewLanguageCreatingAndNavigation()
+    public function testNewLanguageCreatingAndNavigation()
     {
         //EN lang
         $this->loginAdmin("Master Settings", "Languages");
@@ -885,7 +885,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestPriceCategoryCreating()
+    public function testPriceCategoryCreating()
     {
         $this->loginAdmin("Administer Products", "Categories");
         $this->changeAdminListLanguage('Deutsch');
@@ -911,7 +911,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group main
      */
-    public function DISABLEDtestVariantsInheritsSelectionLists()
+    public function testVariantsInheritsSelectionLists()
     {
         //assigning selection list to parent product
         $this->loginAdmin("Administer Products", "Products");
@@ -966,7 +966,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestActiveCategoryAtStart()
+    public function testActiveCategoryAtStart()
     {
         $this->markTestSkipped("waiting for desition from management, if this option should be in azure theme at all");
 
@@ -1013,7 +1013,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestHelpPopupsInAdmin()
+    public function testHelpPopupsInAdmin()
     {
         //testing help popup for shop active checkbox
         $this->loginAdmin("Master Settings", "Core Settings");
@@ -1036,7 +1036,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestEditShopName()
+    public function testEditShopName()
     {
         $shopVersionNumber = $this->getShopVersionNumber();
 
@@ -1056,7 +1056,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestEditShopSave()
+    public function testEditShopSave()
     {
         $this->loginAdmin("Master Settings", "Core Settings");
         $this->frame("edit");
@@ -1211,7 +1211,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestOrdersEditingAmount()
+    public function testOrdersEditingAmount()
     {
         $testConfig = $this->getTestConfig();
         $sShopId = $testConfig->getShopId();
@@ -1320,7 +1320,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestDeletingOrderCheckingProductsAmount()
+    public function testDeletingOrderCheckingProductsAmount()
     {
         $testConfig = $this->getTestConfig();
         $sShopId = $testConfig->getShopId();
@@ -1380,7 +1380,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestCancelingOrderCheckingProductsAmount()
+    public function testCancelingOrderCheckingProductsAmount()
     {
         $testConfig = $this->getTestConfig();
         $sShopId = $testConfig->getShopId();
@@ -1440,7 +1440,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestFrontendNegativeStockValuesOn()
+    public function testFrontendNegativeStockValuesOn()
     {
         //allow negative stock values
         $this->callShopSC("oxConfig", null, null, array("blAllowNegativeStock" => array("type" => "bool", "value" => 'true')));
@@ -1506,7 +1506,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestFrontendNegativeStockValuesOff()
+    public function testFrontendNegativeStockValuesOff()
     {
         //disabling negative stock values
         $this->callShopSC("oxConfig", null, null, array("blAllowNegativeStock" => array("type" => "bool", "value" => "false")));
@@ -1572,7 +1572,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestMultidimensionalVariantsWhichHaveStockPrices()
+    public function testMultidimensionalVariantsWhichHaveStockPrices()
     {
         $this->loginAdmin("Administer Products", "Products");
         $this->type("where[oxarticles][oxartnum]", "3570");
@@ -1605,7 +1605,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestDisplayAttributesValueForProductInCheckout()
+    public function testDisplayAttributesValueForProductInCheckout()
     {
         $this->loginAdmin("Administer Products", "Attributes");
         $this->openListItem("Color", '[oxattribute][oxtitle]');
@@ -1682,7 +1682,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestConversionRateOptions()
+    public function testConversionRateOptions()
     {
         $this->markTestSkipped("There is not done test, so we need to decide  finish or  delete test ");
 
@@ -1704,7 +1704,7 @@ class FunctionalityInAdminTest extends AdminTestCase
      *
      * @group adminFunctionality
      */
-    public function DISABLEDtestEconda()
+    public function testEconda()
     {
         //activating econda
         $aConfigs = array("sShopCountry"      => array("type" => "str", "value" => 'de'),
