@@ -35,20 +35,6 @@ class SearchAndSortingAdminTest extends AdminTestCase
     {
         parent::setUp();
         $this->getTranslator()->setLanguage(1);
-/*
-        $queries = array();
-        $queries[] = "UPDATE oxcategories set OXSORT = (OXSORT+500)";
-        $queries[] = "UPDATE oxcategories set OXSORT = 1 WHERE oxid = 'testcategory0'";
-        $queries[] = "UPDATE oxcategories set OXSORT = 2 WHERE oxid = 'testcat3'";
-        $queries[] = "UPDATE oxcategories set OXSORT = 3 WHERE oxid = 'testcat5'";
-        $queries[] = "UPDATE oxcategories set OXSORT = 4 WHERE oxid = 'testcategory1'";
-        $queries[] = "UPDATE oxcategories set OXSORT = 5 WHERE oxid = 'testcat1'";
-        $queries[] = "UPDATE oxcategories set OXSORT = 6 WHERE oxid = 'testcat9'";
-
-        foreach ($queries as $query) {
-            $this->executeSql($query);
-        }
-*/
     }
 
     /**
