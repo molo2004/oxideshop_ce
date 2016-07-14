@@ -1736,9 +1736,9 @@ class SearchAndSortingAdminTest extends AdminTestCase
         $this->assertElementPresent("//tr[@id='row.2']/td[3]");
     }
 
-     /**
+    /**
      * sorting Categories
-      *
+     *
      * @group search_sort
      */
     public function testSortCategories()
