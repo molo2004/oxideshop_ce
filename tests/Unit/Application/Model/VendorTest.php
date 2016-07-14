@@ -68,7 +68,7 @@ class VendorTest extends \OxidTestCase
 
     /**
      * Test setup
-     *...,,,,,
+     *
      * @return null
      */
     protected function setUp()
